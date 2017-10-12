@@ -17,6 +17,8 @@ public class Squadra extends Partecipante{
 		this.listGiocatori.add(giocatore);
 	}
 	
+	//iahbohabehscbushefbsugevbsgfvb
+	
 	private int nComponenti;
 	private ArrayList<Giocatore> listGiocatori;
 } 

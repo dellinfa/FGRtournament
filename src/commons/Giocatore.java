@@ -13,6 +13,8 @@ public class Giocatore extends Partecipante{
 		this.annoCorso=annoCorso;
 		this.matricola=matricola;
 	}
+	
+	//isjdisjbvibdjsn dkjf
 
 	public String getMatricola() {
 		return matricola;

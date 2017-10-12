@@ -8,6 +8,7 @@ import gestori.GestoreDatiPersistenti;
 public class ControllerRegistraRisultati {
 	
 	public Partita creaPartita() {
+		return null;
 		
 	}
 	

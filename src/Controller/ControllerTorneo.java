@@ -8,10 +8,12 @@ import commons.*;
 public class ControllerTorneo {
 	
 	public Torneo creaTorneo() {
+		return null;
 		
 	}
 	
 	public Partecipante creaPartecipante() {
+		return null;
 		
 	}
 	

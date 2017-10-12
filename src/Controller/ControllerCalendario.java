@@ -9,6 +9,7 @@ import commons.*;
 public class ControllerCalendario {
 	
 	public Calendario creaCalendario() {
+		return null;
 		
 	}
 	

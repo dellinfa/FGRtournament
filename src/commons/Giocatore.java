@@ -14,7 +14,6 @@ public class Giocatore extends Partecipante{
 		this.matricola=matricola;
 	}
 	
-	//isjdisjbvibdjsn dkjf
 
 	public String getMatricola() {
 		return matricola;

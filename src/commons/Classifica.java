@@ -10,7 +10,6 @@ public class Classifica {
 		this.listPartecipanti = listPartecipanti;
 		this.listPartite = listPartite;
 	}
-	
 	public void removePartecipante(Partecipante partecipante) {
 		this.listPartecipanti.remove(partecipante);
 	}

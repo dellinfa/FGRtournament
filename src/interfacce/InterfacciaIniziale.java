@@ -29,12 +29,14 @@
 			intro.getContentPane().add(new JLabel("Seleziona torneo: "), BorderLayout.CENTER );
 			intro.getContentPane().add(entra);
 			
-			ActionListener mainPage= new ActionListener() {
+			ActionListener elencoTorneoInterface= new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					 intro.setVisible(false);
 					 new ElencoTorneiInterface();
 				}
 			};
+			
+			entra.addActionListener(elencoTorneoInterface);
 			intro.pack();
 			intro.setVisible(true);
 

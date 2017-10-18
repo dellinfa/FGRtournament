@@ -29,11 +29,18 @@ public class ElencoTorneiInterface {
 		JButton buttonBasket = new JButton("BASKET");
 		JButton buttonPallavolo = new JButton("PALLAVOLO");
 		JButton buttonIndietro = new JButton("INDIETRO");
+
+		JPanel panel2= new JPanel();
+		panel2.add(buttonPallavolo, BorderLayout.NORTH);
+		panel2.add(buttonCalcio, BorderLayout.CENTER);
+		panel2.add(buttonBasket, BorderLayout.SOUTH);
+		frame.add(panel2, BorderLayout.CENTER);
+		JPanel panel3= new JPanel();		
+		panel3.add(buttonIndietro, BorderLayout.PAGE_START);
+		frame.add(panel3, BorderLayout.SOUTH);
+
 		
-		
-		
-		
-		ActionListener menuPrincipalePallavolo= new ActionListener() {
+		ActionListener menuPrincipalePallavolo=new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 					new MenuPrincipale();								
@@ -66,17 +73,9 @@ public class ElencoTorneiInterface {
 		buttonBasket.addActionListener(menuPrincipaleBasket);
 		buttonIndietro.addActionListener(indietroListener);
 		
-		JPanel panel2= new JPanel();
-		panel2.add(buttonPallavolo, BorderLayout.NORTH);
-		panel2.add(buttonCalcio, BorderLayout.CENTER);
-		panel2.add(buttonBasket, BorderLayout.SOUTH);
-		frame.add(panel2, BorderLayout.CENTER);
-		JPanel panel3= new JPanel();		
-		panel3.add(buttonIndietro, BorderLayout.PAGE_START);
-		frame.add(panel3, BorderLayout.SOUTH);
-		
 		frame.pack();
 		frame.setVisible(true);
+		
 	}
 	private JFrame frame;
 }

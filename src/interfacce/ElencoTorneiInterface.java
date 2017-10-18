@@ -14,8 +14,7 @@ public class ElencoTorneiInterface {
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
-		
-		
+
 		JPanel panel1=new JPanel();
 		JLabel label1=new JLabel("Seleziona il torneo");
 		panel1.add(label1);

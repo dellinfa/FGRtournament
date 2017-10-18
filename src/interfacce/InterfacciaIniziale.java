@@ -27,7 +27,7 @@ import javax.swing.JScrollBar;
 			
 			intro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			intro.getContentPane().setLayout(new BorderLayout());
-			intro.getContentPane().add(new JLabel("Seleziona torneo: "), BorderLayout.NORTH);
+			intro.getContentPane().add(new JLabel(""), BorderLayout.NORTH);
 			intro.getContentPane().add(entra);
 			
 			ActionListener elencoTorneoInterface= new ActionListener() {

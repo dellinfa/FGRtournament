@@ -13,11 +13,13 @@ import javax.swing.JPanel;
 public class ElencoTorneiInterface {
 
 	public ElencoTorneiInterface() {
+		
 		frame=new JFrame();
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 
+		frame.setLocation(250, 250);
 		JPanel panel1=new JPanel();
 		JLabel label1=new JLabel("Seleziona il torneo");
 		panel1.add(label1);
@@ -41,7 +43,6 @@ public class ElencoTorneiInterface {
 		ActionListener menuPrincipaleCalcio= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				
 				new MenuPrincipale();				
 			}
 		};
@@ -52,15 +53,13 @@ public class ElencoTorneiInterface {
 				new MenuPrincipale();				
 			}
 		};
-		
 
 		ActionListener indietroListener=new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				new InterfacciaIniziale();
-				frame.setVisible(true);
+
 			}
 		};
-		
 		
 		buttonPallavolo.addActionListener(menuPrincipalePallavolo);
 		buttonCalcio.addActionListener(menuPrincipaleCalcio);
@@ -79,7 +78,5 @@ public class ElencoTorneiInterface {
 		frame.pack();
 		frame.setVisible(true);
 	}
-
 	private JFrame frame;
-
 }

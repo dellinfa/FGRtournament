@@ -14,11 +14,15 @@ public class MenuPrincipale {
 		frame=new JFrame();
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocation(250, 250);
 		
 		JPanel panel1=new JPanel();
-		JLabel label1=new JLabel("Seleziona il torneo:");
+		JLabel label1=new JLabel("Scegli l'azione da fare");
 		panel1.add(label1);
 		frame.add(panel1,BorderLayout.NORTH);
+		
+		JPanel panel2= new JPanel();
+
 		
 		frame.pack();
 		frame.setVisible(true);

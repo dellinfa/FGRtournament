@@ -11,8 +11,8 @@ import java.awt.event.ActionEvent;
 	import javax.swing.JFrame;
 	import javax.swing.JLabel;
 	import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
+	import javax.swing.JPanel;
+	import javax.swing.JScrollBar;
 	import javax.swing.JScrollPane;
 	import javax.swing.ListSelectionModel;
 
@@ -21,7 +21,12 @@ import javax.swing.JScrollBar;
 	public class InterfacciaIniziale {
 
 		public static void main(String[] args) {
+			
+			new InterfacciaIniziale();
+			
+	}
 		
+		public InterfacciaIniziale() {
 			JFrame intro= new JFrame("FGRtournament");
 			JButton entra = new JButton("Entra");
 			JPanel p1 = new JPanel();
@@ -61,7 +66,8 @@ import javax.swing.JScrollBar;
 		}
 		
 		
-	}
+		}
+	
 
 
 

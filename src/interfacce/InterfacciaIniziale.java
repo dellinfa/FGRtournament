@@ -10,7 +10,8 @@
 	import javax.swing.JFrame;
 	import javax.swing.JLabel;
 	import javax.swing.JList;
-	import javax.swing.JScrollBar;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 	import javax.swing.JScrollPane;
 	import javax.swing.ListSelectionModel;
 
@@ -26,7 +27,7 @@
 			
 			intro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			intro.getContentPane().setLayout(new BorderLayout());
-			intro.getContentPane().add(new JLabel("Seleziona torneo: "), BorderLayout.CENTER );
+			intro.getContentPane().add(new JLabel(""), BorderLayout.NORTH);
 			intro.getContentPane().add(entra);
 			
 			ActionListener elencoTorneoInterface= new ActionListener() {
@@ -37,6 +38,7 @@
 			};
 			
 			entra.addActionListener(elencoTorneoInterface);
+			
 			intro.pack();
 			intro.setVisible(true);
 

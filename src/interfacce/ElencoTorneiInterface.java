@@ -50,7 +50,7 @@ public class ElencoTorneiInterface {
 				new MenuPrincipale();				
 			}
 		};
-		
+		//g
 		ActionListener menuPrincipaleBasket= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);

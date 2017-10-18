@@ -32,8 +32,10 @@ public class ElencoTorneiInterface {
 		panel2.add(buttonPallavolo, BorderLayout.NORTH);
 		panel2.add(buttonCalcio, BorderLayout.CENTER);
 		panel2.add(buttonBasket, BorderLayout.SOUTH);
-		panel2.add(buttonIndietro, BorderLayout.AFTER_LINE_ENDS);
 		frame.add(panel2, BorderLayout.CENTER);
+		JPanel panel3= new JPanel();		
+		panel3.add(buttonIndietro, BorderLayout.PAGE_START);
+		frame.add(panel3, BorderLayout.SOUTH);
 		
 		
 		ActionListener menuPrincipalePallavolo= new ActionListener() {
@@ -50,7 +52,7 @@ public class ElencoTorneiInterface {
 				new MenuPrincipale();				
 			}
 		};
-		//g
+	
 		ActionListener menuPrincipaleBasket= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
@@ -61,8 +63,8 @@ public class ElencoTorneiInterface {
 
 		ActionListener indietro= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-					new InterfacciaIniziale();								
+				new InterfacciaIniziale();
+				frame.setVisible(false);												
 			}
 		};
 		

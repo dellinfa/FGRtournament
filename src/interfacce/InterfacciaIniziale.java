@@ -26,7 +26,7 @@ import javax.swing.JScrollBar;
 			JButton entra = new JButton("Entra");
 			JPanel p1 = new JPanel();
 			JLabel l1 = new JLabel("Benvenuto in FGRtournament, software per gestire tornei di Pallavolo,Basket,Calcio.      "
-					+ "Entra per selezionare la tipologia del torneo.");
+					+ "Entra per selezionare il torneo.");
 			
 			JPanel p2 = new JPanel();
 			

@@ -37,7 +37,7 @@ public class ElencoTorneiInterface {
 		JPanel panel3= new JPanel();		
 		panel3.add(buttonIndietro, BorderLayout.PAGE_START);
 		frame.add(panel3, BorderLayout.SOUTH);
-		
+		//g
 		
 		ActionListener menuPrincipalePallavolo= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

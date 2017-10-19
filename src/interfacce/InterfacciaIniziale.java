@@ -30,24 +30,37 @@ import java.awt.event.ActionEvent;
 			JFrame intro= new JFrame("FGRtournament");
 			JButton entra = new JButton("Entra");
 			JPanel p1 = new JPanel();
-			JLabel l1 = new JLabel("Benvenuto in FGRtournament, software per gestire tornei di Pallavolo,Basket,Calcio.      "
-					+ "Entra per selezionare il torneo.");
-			
 			JPanel p2 = new JPanel();
+			JPanel p3 = new JPanel();
+			JLabel l1 = new JLabel("Benvenuto in FGRtournament, software per gestire tornei di Pallavolo,Basket,Calcio.");
+			JLabel l2 = new JLabel("Entra per selezionare il torneo.");
 			
-			intro.pack();
-			intro.setLocation(250,250);
-			intro.setVisible(true);
-			intro.setTitle("FGRtournament");
-			intro.setLayout(null);
+		//	intro.getContentPane().setLayout(new BorderLayout());
 			intro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			intro.getContentPane().setLayout(new BorderLayout());
+			intro.setLocation(250,250);
 			
-			p1.add(l1);
-			p2.add(entra);
+			intro.add(p1, BorderLayout.NORTH);
+			intro.add(p2, BorderLayout.CENTER);
+			intro.add(p3, BorderLayout.SOUTH);
+			/*intro.add(p2, BorderLayout.SOUTH);
+			p1.add(l1, BorderLayout.NORTH);
+			p1.add(l2, BorderLayout.SOUTH);
+			p2.add(entra, BorderLayout.CENTER);
 			
 			intro.add(p1,BorderLayout.NORTH);
 			intro.add(p2,BorderLayout.CENTER);
+			*/
+			//intro.getContentPane().add(l1, BorderLayout.NORTH);
+			p1.setLayout(new BorderLayout());
+			p2.setLayout(new BorderLayout());
+			p3.setLayout(new BorderLayout());
+			p1.add(l1, BorderLayout.NORTH);
+			p2.add(l2, BorderLayout.NORTH);
+			p3.add(entra, BorderLayout.NORTH);
+		//	intro.getContentPane().add(l1, BorderLayout.PAGE_START);
+		//	intro.getContentPane().add(l2, BorderLayout.NORTH);
+		//	intro.getContentPane().add(entra, BorderLayout.CENTER);
+			
 			
 			ActionListener elencoTorneoInterface = new ActionListener() {
 				public void actionPerformed(ActionEvent e) {

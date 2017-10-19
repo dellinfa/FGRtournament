@@ -14,12 +14,11 @@ public class ElencoTorneiInterface {
 
 	public ElencoTorneiInterface() {
 		
-		frame=new JFrame();
+		frame=new JFrame("FGRtournament");
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
-
 		frame.setLocation(250, 250);
+		
 		JPanel panel1=new JPanel();
 		JLabel label1=new JLabel("Seleziona il torneo");
 		panel1.add(label1);
@@ -43,32 +42,32 @@ public class ElencoTorneiInterface {
 		ActionListener menuPrincipalePallavolo=new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-					new MenuPrincipale();								
+					new MenuPrincipale(0);								
 			}
 		};
 		
 		ActionListener menuPrincipaleCalcio= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new MenuPrincipale();				
+				new MenuPrincipale(1);				
 			}
 		};
 	
 		ActionListener menuPrincipaleBasket= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new MenuPrincipale();	
-				
+				new MenuPrincipale(2);	
 			}
 		};
+
 
 		ActionListener indietroListener=new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				new InterfacciaIniziale();
-				frame.setVisible(false);
 			}
-		};
-		
+		};	
+				
+
 		buttonPallavolo.addActionListener(menuPrincipalePallavolo);
 		buttonCalcio.addActionListener(menuPrincipaleCalcio);
 		buttonBasket.addActionListener(menuPrincipaleBasket);
@@ -77,6 +76,14 @@ public class ElencoTorneiInterface {
 		frame.pack();
 		frame.setVisible(true);
 		
-	}
-	private JFrame frame;
+
+	
+	
+}
+		
+		public static void main(String[] args) {
+			
+			new ElencoTorneiInterface();
+		}
+		private JFrame frame;
 }

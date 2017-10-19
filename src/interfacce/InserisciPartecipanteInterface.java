@@ -43,7 +43,7 @@ public class InserisciPartecipanteInterface {
 			panel3.setLayout(new GridLayout(10,2));
 			
 			//String partecipante[]= {"Squadra", "Giocatore"};
-			JComboBox listaProfili=new JComboBox(partecipante);
+			JComboBox listaProfili=new JComboBox();
 			
 		//	listaProfili.addItem("Squadra");
 		//	listaProfili.addItem("Partecipante");

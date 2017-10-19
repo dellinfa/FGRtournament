@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -39,9 +41,26 @@ public class InserisciPartecipanteInterface {
 			panel2.setLayout(new BorderLayout());
 			JPanel panel3=new JPanel();
 			panel3.setLayout(new GridLayout(10,2));
-			JComboBox listaProfili=new JComboBox();
-			listaProfili.addItem("Squadra");
-			listaProfili.addItem("Partecipante");
+			
+			//String partecipante[]= {"Squadra", "Giocatore"};
+			JComboBox listaProfili=new JComboBox(partecipante);
+			
+		//	listaProfili.addItem("Squadra");
+		//	listaProfili.addItem("Partecipante");
+			
+/*
+			ItemListener itemListner = new ItemListener() {
+				
+				@Override
+				public void itemStateChanged(ItemEvent ie) {
+					// TODO Auto-generated method stub
+					int state=ie.getStateChange();
+					((state == ItemEvent.SELECTED) ?"Giocatore":"Squadra");
+				}
+			};
+			
+			listaProfili.addItemListener(itemListner);*/
+			
 			if(listaProfili.getSelectedItem()== "Partecipante") {
 				JLabel label2=new JLabel("Inserisci il Nome");
 				JTextField nome=new JTextField(20);

@@ -57,14 +57,15 @@ public class ElencoTorneiInterface {
 		ActionListener menuPrincipaleBasket= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new MenuPrincipale();				
+				new MenuPrincipale();	
+				
 			}
 		};
 
 		ActionListener indietroListener=new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				new InterfacciaIniziale();
-
+				frame.setVisible(false);
 			}
 		};
 		

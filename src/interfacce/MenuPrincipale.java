@@ -17,7 +17,7 @@ public class MenuPrincipale {
 	public MenuPrincipale(int sport) {
 		
 		this.sport=sport;
-		
+		System.out.println(sport);
 		frame=new JFrame("Menu principale");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout());

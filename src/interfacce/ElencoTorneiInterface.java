@@ -43,21 +43,21 @@ public class ElencoTorneiInterface {
 		ActionListener menuPrincipalePallavolo=new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-					new MenuPrincipale(1);								
+					new MenuPrincipale(0);								
 			}
 		};
 		
 		ActionListener menuPrincipaleCalcio= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new MenuPrincipale(2);				
+				new MenuPrincipale(1);				
 			}
 		};
 	
 		ActionListener menuPrincipaleBasket= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new MenuPrincipale(3);				
+				new MenuPrincipale(2);				
 			}
 		};
 

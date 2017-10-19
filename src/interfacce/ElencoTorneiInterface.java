@@ -43,27 +43,28 @@ public class ElencoTorneiInterface {
 		ActionListener menuPrincipalePallavolo=new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-					new MenuPrincipale();								
+					new MenuPrincipale(1);								
 			}
 		};
 		
 		ActionListener menuPrincipaleCalcio= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new MenuPrincipale();				
+				new MenuPrincipale(2);				
 			}
 		};
 	
 		ActionListener menuPrincipaleBasket= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new MenuPrincipale();				
+				new MenuPrincipale(3);				
 			}
 		};
 
 		ActionListener indietroListener=new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				new InterfacciaIniziale();
+			frame.setVisible(false);
 
 			}
 		};
@@ -78,4 +79,9 @@ public class ElencoTorneiInterface {
 		
 	}
 	private JFrame frame;
+	
+	public static void main(String[] args) {
+		
+		new ElencoTorneiInterface();
+	}
 }

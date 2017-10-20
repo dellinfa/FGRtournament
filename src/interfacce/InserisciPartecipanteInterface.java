@@ -39,14 +39,15 @@ public class InserisciPartecipanteInterface {
 			
 			JPanel panel2=new JPanel();
 			panel2.setLayout(new BorderLayout());
+			JButton conferma = new JButton();
 			JPanel panel3=new JPanel();
 			panel3.setLayout(new GridLayout(10,2));
 			
 			//String partecipante[]= {"Squadra", "Giocatore"};
 			JComboBox listaProfili=new JComboBox();
 			
-		//	listaProfili.addItem("Squadra");
-		//	listaProfili.addItem("Partecipante");
+			listaProfili.addItem("Squadra");
+			listaProfili.addItem("Partecipante");
 			
 /*
 			ItemListener itemListner = new ItemListener() {
@@ -84,6 +85,7 @@ public class InserisciPartecipanteInterface {
 				JLabel label11=new JLabel("Inserisci il tuo indirizzo");
 				
 				panel2.add(listaProfili,BorderLayout.NORTH);
+				
 				
 				panel3.add(label2);
 				panel3.add(nome);

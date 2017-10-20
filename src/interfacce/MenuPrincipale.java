@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 public class MenuPrincipale {
 	
 	public MenuPrincipale(int sport) {
-		
-		//this.sport=sport;
+		System.out.println(sport);
+		this.sport=sport;
 		
 		frame=new JFrame("Menu principale");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

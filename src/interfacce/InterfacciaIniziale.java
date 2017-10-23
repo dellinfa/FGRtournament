@@ -55,7 +55,7 @@ import java.awt.event.ActionEvent;
 			p2.setLayout(new BorderLayout());
 			p3.setLayout(new BorderLayout());
 			p1.add(l1, BorderLayout.NORTH);
-			p2.add(l2, BorderLayout.NORTH);
+			p2.add(l2, BorderLayout.CENTER);
 			p3.add(entra, BorderLayout.NORTH);
 		//	intro.getContentPane().add(l1, BorderLayout.PAGE_START);
 		//	intro.getContentPane().add(l2, BorderLayout.NORTH);

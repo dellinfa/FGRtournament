@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class InserisciPartecipantePallavoloInterface {
 	
 	public InserisciPartecipantePallavoloInterface() {
-		System.out.println("entro");
+
 		frame=new JFrame();
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(new BorderLayout());

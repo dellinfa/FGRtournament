@@ -89,16 +89,17 @@ public class FormCreaTorneo {
 		panel3.add(label3);
 		panel3.add(modSvolgimentoIncontroSingola);
 		panel3.add(modSvolgimentoIncontroSquadra);
+		panel3.add(label6);
+		panel3.add(dateChooser);
+		panel3.add(label7);
+		panel3.add(dateChooser1);
 		panel3.add(label8);
 		panel3.add(cbMaxPartecipanti);
 		panel3.add(label4);
 		panel3.add(cbAttribuzionePt);
 		panel3.add(label5);
 		panel3.add(intervalloTempo);
-		panel3.add(label6);
-		panel3.add(dateChooser);
-		panel3.add(label7);
-		panel3.add(dateChooser1);
+		
 		
 		
 		

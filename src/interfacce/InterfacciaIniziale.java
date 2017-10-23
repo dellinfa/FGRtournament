@@ -34,32 +34,19 @@ import java.awt.event.ActionEvent;
 			JLabel l1 = new JLabel("Benvenuto in FGRtournament, software per la gestione di tornei.");
 			JLabel l2 = new JLabel("Entra per selezionare il torneo.");
 			
-		//	intro.getContentPane().setLayout(new BorderLayout());
 			intro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			intro.setLocation(400,100);
 			
 			intro.add(p1, BorderLayout.NORTH);
 			intro.add(p2, BorderLayout.CENTER);
 			intro.add(p3, BorderLayout.SOUTH);
-			/*intro.add(p2, BorderLayout.SOUTH);
-			p1.add(l1, BorderLayout.NORTH);
-			p1.add(l2, BorderLayout.SOUTH);
-			p2.add(entra, BorderLayout.CENTER);
 			
-			intro.add(p1,BorderLayout.NORTH);
-			intro.add(p2,BorderLayout.CENTER);
-			*/
-			//intro.getContentPane().add(l1, BorderLayout.NORTH);
 			p1.setLayout(new BorderLayout());
 			p2.setLayout(new BorderLayout());
 			p3.setLayout(new BorderLayout());
 			p1.add(l1, BorderLayout.NORTH);
 			p2.add(l2, BorderLayout.CENTER);
-			p3.add(entra, BorderLayout.NORTH);
-		//	intro.getContentPane().add(l1, BorderLayout.PAGE_START);
-		//	intro.getContentPane().add(l2, BorderLayout.NORTH);
-		//	intro.getContentPane().add(entra, BorderLayout.CENTER);
-			
+			p3.add(entra, BorderLayout.NORTH);			
 			
 			ActionListener elencoTorneoInterface = new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -70,17 +57,12 @@ import java.awt.event.ActionEvent;
 			
 			entra.addActionListener(elencoTorneoInterface);
 			
-			
-
 			intro.pack();
 			intro.setVisible(true);
 			intro.setSize(500,100);
 			
-
 		}
-		
-		
-		}
+}
 	
 
 

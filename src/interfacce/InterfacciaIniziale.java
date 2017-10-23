@@ -25,7 +25,6 @@ import java.awt.event.ActionEvent;
 			new InterfacciaIniziale();
 			
 	}
-		//dddddd
 		public InterfacciaIniziale() {
 			JFrame intro= new JFrame("FGRtournament");
 			JButton entra = new JButton("Entra");

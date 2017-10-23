@@ -17,10 +17,10 @@ public class MenuPrincipale {
 	public MenuPrincipale(int sport) {
 		this.sport=sport;
 		
-		frame=new JFrame("Menu principale");
+		frame=new JFrame("FGRtournament");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout());
-		frame.setLocation(250, 250);
+		frame.setLocation(400, 100);
 		
 		JPanel panel1=new JPanel();
 		JLabel label1=new JLabel("Seleziona un'operazione da effettuare");
@@ -28,7 +28,7 @@ public class MenuPrincipale {
 		frame.add(label1,BorderLayout.NORTH);
 		
 		JPanel panel2=new JPanel();
-		panel2.setLayout(new GridLayout(3,1));
+		panel2.setLayout(new GridLayout(4,1));
 		JButton calendario=new JButton("Calendario");
 		panel2.add(calendario);
 		frame.add(panel2,BorderLayout.CENTER);
@@ -38,6 +38,9 @@ public class MenuPrincipale {
 		
 		JButton inserisciPartecipante=new JButton("Inserisci partecipante");
 		panel2.add(inserisciPartecipante);
+		
+		JButton creaCalendario= new JButton(" Crea calendario");
+		panel2.add(creaCalendario);
 		
 		JPanel panel3 = new JPanel();
 		panel3.setLayout(new GridLayout(1,1));
@@ -91,6 +94,7 @@ public class MenuPrincipale {
 		
 		frame.pack();
 		frame.setVisible(true);
+		frame.setSize(500,250);
 		
 	}
 

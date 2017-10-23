@@ -17,78 +17,43 @@ public class ElencoTorneiInterface {
 		frame=new JFrame("FGRtournament");
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocation(250, 250);
+		frame.setLocation(400, 100);
 		
 		JPanel panel1=new JPanel();
-		JLabel label1=new JLabel("Seleziona il torneo");
+		JPanel panel2=new JPanel();
+		panel1.setLayout(new BorderLayout());
+		panel2.setLayout(new BorderLayout());
+		JLabel label1=new JLabel("Crea o seleziona il torneo");
 		panel1.add(label1);
 		frame.add(panel1,BorderLayout.NORTH);
-		
-		JButton buttonCalcio = new JButton("CALCIO");
-		JButton buttonBasket = new JButton("BASKET");
-		JButton buttonPallavolo = new JButton("PALLAVOLO");
-		JButton buttonPingPong = new JButton("PING PONG");
+		frame.add(panel2, BorderLayout.SOUTH);
+		JButton buttonCreaTorneo = new JButton("CREA TORNEO");
 		JButton buttonIndietro = new JButton("INDIETRO");
-		JButton buttonCreaTorneo= new JButton("CREA TORNEO");
+		panel2.add(buttonCreaTorneo, BorderLayout.EAST);
+		panel2.add(buttonIndietro, BorderLayout.WEST);
 
-		JPanel panel2= new JPanel();
-		JPanel panel3= new JPanel();
-		panel2.add(buttonPallavolo, BorderLayout.NORTH);
-		panel2.add(buttonCalcio, BorderLayout.CENTER);
-		panel2.add(buttonBasket, BorderLayout.SOUTH);
-		panel2.add(buttonPingPong, BorderLayout.WEST);
-		panel3.add(buttonCreaTorneo, BorderLayout.EAST);
-		frame.add(panel2, BorderLayout.CENTER);
-				
-		panel3.add(buttonIndietro, BorderLayout.PAGE_START);
-		frame.add(panel3, BorderLayout.SOUTH);
-
-		
-		ActionListener menuPrincipalePallavolo=new ActionListener() {
+		ActionListener creaTorneo=new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-					new MenuPrincipale(0);								
+					new FormCreaTorneo();								
 			}
 		};
 		
-		ActionListener menuPrincipaleCalcio= new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		ActionListener indietro=new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				new InterfacciaIniziale();				
 				frame.setVisible(false);
-				new MenuPrincipale(1);				
 			}
 		};
 	
-		ActionListener menuPrincipaleBasket= new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-				new MenuPrincipale(2);	
-			}
-		};
+
+		buttonIndietro.addActionListener(indietro);
+		buttonCreaTorneo.addActionListener(creaTorneo);
 		
-		ActionListener menuPrincipalePingPong= new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-				new MenuPrincipale(3);	
-			}
-		};
-
-		ActionListener indietroListener=new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				new InterfacciaIniziale();
-				frame.setVisible(false);
-			}
-		};	
-				
-
-		buttonPallavolo.addActionListener(menuPrincipalePallavolo);
-		buttonCalcio.addActionListener(menuPrincipaleCalcio);
-		buttonBasket.addActionListener(menuPrincipaleBasket);
-		buttonPingPong.addActionListener(menuPrincipalePingPong);
-		buttonIndietro.addActionListener(indietroListener);
 		
 		frame.pack();
 		frame.setVisible(true);
-		
+		frame.setSize(500,200);
 
 	
 	

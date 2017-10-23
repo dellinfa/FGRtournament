@@ -72,7 +72,7 @@ public class MenuPrincipale {
 			insert=new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					frame.setVisible(false);
-					new InserisciPartecipanteInterfaccia();
+					new FormCreaTorneo();
 					
 				}
 			};

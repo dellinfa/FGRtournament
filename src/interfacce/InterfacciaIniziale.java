@@ -37,7 +37,7 @@ import java.awt.event.ActionEvent;
 			
 		//	intro.getContentPane().setLayout(new BorderLayout());
 			intro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			intro.setLocation(250,250);
+			intro.setLocation(400,100);
 			
 			intro.add(p1, BorderLayout.NORTH);
 			intro.add(p2, BorderLayout.CENTER);
@@ -71,9 +71,11 @@ import java.awt.event.ActionEvent;
 			
 			entra.addActionListener(elencoTorneoInterface);
 			
+			
+
 			intro.pack();
 			intro.setVisible(true);
-			intro.setSize(850,200);
+			intro.setSize(500,100);
 			
 
 		}

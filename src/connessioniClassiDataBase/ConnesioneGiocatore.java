@@ -35,7 +35,7 @@ public class ConnesioneGiocatore {
 			}finally {
 					if(con!=null)
 						con.close();
-			}//dascs
+			}
 				}
 		}
 }

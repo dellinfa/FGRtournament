@@ -32,7 +32,7 @@ import java.awt.event.ActionEvent;
 			JPanel p1 = new JPanel();
 			JPanel p2 = new JPanel();
 			JPanel p3 = new JPanel();
-			JLabel l1 = new JLabel("Benvenuto in FGRtournament, software per gestire tornei di Pallavolo,Basket,Calcio.");
+			JLabel l1 = new JLabel("Benvenuto in FGRtournament, software per la gestione di tornei.");
 			JLabel l2 = new JLabel("Entra per selezionare il torneo.");
 			
 		//	intro.getContentPane().setLayout(new BorderLayout());

@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 public class MenuPrincipale {
 	
 	public MenuPrincipale(int sport) {
-		System.out.println(sport);
 		this.sport=sport;
 		
 		frame=new JFrame("Menu principale");
@@ -60,23 +59,24 @@ public class MenuPrincipale {
 			}
 		};
 		
-	ActionListener insert;
-	if (sport==0) {	
-		insert=new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-				new InserisciPartecipantePallavoloInterface();
-			}
-		};
-	}
-	else {
-		insert=new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-				new InserisciPartecipanteInterface();
-			}
-		};
-	}
+		ActionListener insert;
+		if (sport==0) {	
+			insert=new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					frame.setVisible(false);
+					new InserisciPartecipantePallavoloInterface();
+				}
+			};
+		}
+		else {
+			insert=new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					frame.setVisible(false);
+					new InserisciPartecipanteInterfaccia();
+					
+				}
+			};
+		}
 		ActionListener back=new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				new ElencoTorneiInterface();

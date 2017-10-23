@@ -1,11 +1,14 @@
 package interfacce;
 
 import java.awt.BorderLayout;
+
+import connessioniClassiDataBase.ConnesioneGiocatore;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -62,16 +65,17 @@ public class InserisciPartecipanteInterface {
 			
 			listaProfili.addItemListener(itemListner);*/
 			
-			if(listaProfili.getSelectedItem()== "Partecipante") {
-				JLabel label2=new JLabel("Inserisci il Nome");
+		
+			if(listaProfili.getSelectedItem().equals("Partecipante")) {
+				JLabel label2=new JLabel("Inserisci il Nome per intero aaaaaaaaa");
 				JTextField nome=new JTextField(20);
-				JLabel label3=new JLabel("Inserisci il Cognome");
+				JLabel label3=new JLabel("Inserisci la data di nascita");
 				JTextField cognome=new JTextField(20);
-				JLabel label4=new JLabel("Inserisci il codiceFiscale");
+				JLabel label4=new JLabel("Inserisci l'anno di immatricolazione");
 				JTextField codiceFiscale=new JTextField(20);
-				JLabel label5=new JLabel("Inserisci la tua email");
+				JLabel label5=new JLabel("Inserisci l'anno di corso");
 				JTextField email=new JTextField(20);
-				JLabel label6=new JLabel("Inserisci il tuo username");
+				JLabel label6=new JLabel("Inserisci la matricola");
 				JTextField username=new JTextField(20);
 				JLabel label7=new JLabel("Inserisci una password");
 				JPasswordField password1=new JPasswordField(20);
@@ -141,7 +145,20 @@ public class InserisciPartecipanteInterface {
 							JOptionPane.showMessageDialog(null, "Il codice di sicurezza deve essere un intero");
 						}
 						
-					
+						String a = nome.getText();
+						String b = cognome.getText();
+						String c = codiceFiscale.getText();
+						String d = indirizzo.getText();
+						String g = email.getText();
+						String f = username.getText();
+						
+						ConnesioneGiocatore cg = new ConnesioneGiocatore();
+						
+						try {
+							cg.save(a, b, c, d, g, f);
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
 					}
 				};
 				
@@ -161,18 +178,18 @@ public class InserisciPartecipanteInterface {
 				frame.setVisible(true);
 			}
 			else {
-				JLabel label2=new JLabel("Inserisci il CAZZOOOOOOOOOOOOO");
+				JLabel label2=new JLabel("Inserisci il Nome per intero");
 				JTextField nome=new JTextField(20);
-				JLabel label3=new JLabel("Inserisci il Cognome");
+				JLabel label3=new JLabel("Inserisci cognome");
 				JTextField cognome=new JTextField(20);
-				JLabel label4=new JLabel("Inserisci il codiceFiscale");
-				JTextField codiceFiscale=new JTextField(20);
-				JLabel label5=new JLabel("Inserisci la tua email");
-				JTextField email=new JTextField(20);
-				JLabel label6=new JLabel("Inserisci il tuo username");
-				JTextField username=new JTextField(20);
-				JLabel label7=new JLabel("Inserisci una password");
-				JPasswordField password1=new JPasswordField(20);
+				JLabel label4=new JLabel("Inserisci la data di Nascita");
+				JTextField dataNascita=new JTextField(20);
+				JLabel label5=new JLabel("Inserisci l'anno di immatricolazoine");
+				JTextField annoImm=new JTextField(20);
+				JLabel label6=new JLabel("Inserisci l'anno di corso");
+				JTextField annoCorso=new JTextField(20);
+				JLabel label7=new JLabel("Inserisci una matricola");
+				JPasswordField matricola=new JPasswordField(20);
 				JLabel label8=new JLabel("Inserisci di nuovo la password");
 				JPasswordField password2=new JPasswordField(20);
 				JLabel label9=new JLabel("(Solo se Impiegato o Amministratore) Inserisci il codice di sicurezza");
@@ -189,15 +206,13 @@ public class InserisciPartecipanteInterface {
 				panel3.add(label3);
 				panel3.add(cognome);
 				panel3.add(label4);
-				panel3.add(codiceFiscale);
-				panel3.add(label11);
-				panel3.add(indirizzo);
+				panel3.add(dataNascita);
 				panel3.add(label5);
-				panel3.add(email);
+				panel3.add(annoImm);
 				panel3.add(label6);
-				panel3.add(username);
+				panel3.add(annoCorso);
 				panel3.add(label7);
-				panel3.add(password1);
+				panel3.add(matricola);
 				panel3.add(label8);
 				panel3.add(password2);
 				panel3.add(label9);
@@ -220,10 +235,10 @@ public class InserisciPartecipanteInterface {
 				
 				ActionListener registraListener=new ActionListener(){
 					public void actionPerformed(ActionEvent e){
-						try{
+						/*try{
 							
 						int codiceSicurezza=Integer.parseInt(new String(password3.getPassword()));
-	/*					if(new String(password1.getPassword()).equals(new String(password2.getPassword())))
+						if(new String(password1.getPassword()).equals(new String(password2.getPassword())))
 							if(new String(password3.getPassword()).equals(new String(password4.getPassword())))
 							if(listaProfili.getSelectedItem().equals("Amministratore"))
 									controller.creaProfiloUtente(nome.getText(), cognome.getText(), codiceFiscale.getSelectedText(), indirizzo.getText(), email.getText(), username.getText(), new String(password1.getPassword()), (String)listaProfili.getSelectedItem(), codiceSicurezza, 0);
@@ -231,14 +246,28 @@ public class InserisciPartecipanteInterface {
 									controller.creaProfiloUtente(nome.getText(), cognome.getText(), codiceFiscale.getSelectedText(), indirizzo.getText(), email.getText(), username.getText(), new String(password1.getPassword()), (String)listaProfili.getSelectedItem(),0,codiceSicurezza);
 								else
 									controller.creaProfiloUtente(nome.getText(), cognome.getText(), codiceFiscale.getSelectedText(), indirizzo.getText(), email.getText(), username.getText(), new String(password1.getPassword()), (String)listaProfili.getSelectedItem(), 0, 0);
-						*/
+						
 						frame.setVisible(false);
 						JOptionPane.showMessageDialog(null, "Registrazione avvenuta con successo");
 						}catch(NumberFormatException e1){
 							JOptionPane.showMessageDialog(null, "Il codice di sicurezza deve essere un intero");
-						}
+							
+						}*/
 						
-					
+						String a = nome.getText();
+						String b = cognome.getText();
+						String c = dataNascita.getText();
+						String d = annoImm.getText();
+						String g = annoCorso.getText();
+						String f = matricola.getText();
+						
+						ConnesioneGiocatore cg = new ConnesioneGiocatore();
+						
+						try {
+							cg.save(a, b, c, d, g, f);
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
 					}
 				};
 			

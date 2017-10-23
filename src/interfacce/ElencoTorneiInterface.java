@@ -29,14 +29,17 @@ public class ElencoTorneiInterface {
 		JButton buttonPallavolo = new JButton("PALLAVOLO");
 		JButton buttonPingPong = new JButton("PING PONG");
 		JButton buttonIndietro = new JButton("INDIETRO");
+		JButton buttonCreaTorneo= new JButton("CREA TORNEO");
 
 		JPanel panel2= new JPanel();
+		JPanel panel3= new JPanel();
 		panel2.add(buttonPallavolo, BorderLayout.NORTH);
 		panel2.add(buttonCalcio, BorderLayout.CENTER);
 		panel2.add(buttonBasket, BorderLayout.SOUTH);
 		panel2.add(buttonPingPong, BorderLayout.WEST);
+		panel3.add(buttonCreaTorneo, BorderLayout.EAST);
 		frame.add(panel2, BorderLayout.CENTER);
-		JPanel panel3= new JPanel();		
+				
 		panel3.add(buttonIndietro, BorderLayout.PAGE_START);
 		frame.add(panel3, BorderLayout.SOUTH);
 

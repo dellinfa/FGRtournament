@@ -7,7 +7,7 @@ public class Torneo {
 	
 	public Torneo(String modIscrizione, Enum modSvolgimentoIncontro, Enum modAttribuzionePtGara, int maxPartecipanti,
 			int intervalloTempo, Date dataInizioTorneo, Date dataFineTorneo, Calendario calendario,
-			Classifica classifica, ArrayList<Partecipante> listPartecipanti) {
+			Classifica classifica, ArrayList<Partecipante> listPartecipanti, String sport) {
 		this.modIscrizione = modIscrizione;
 		this.modSvolgimentoIncontro = modSvolgimentoIncontro;
 		this.modAttribuzionePtGara = modAttribuzionePtGara;
@@ -18,6 +18,7 @@ public class Torneo {
 		this.calendario = calendario;
 		this.classifica = classifica;
 		this.listPartecipanti = listPartecipanti;
+		this.sport=sport;
 	}
 	
 	public void removePartecipante(Partecipante partecipante) {
@@ -47,7 +48,7 @@ public class Torneo {
 
 
 
-	private String modIscrizione;
+	private String modIscrizione, sport;
 	private Enum modSvolgimentoIncontro, modAttribuzionePtGara;
 	private int maxPartecipanti, intervalloTempo;
 	private Date dataInizioTorneo, dataFineTorneo;

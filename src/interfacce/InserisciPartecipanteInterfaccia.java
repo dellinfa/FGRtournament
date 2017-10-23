@@ -51,8 +51,7 @@ public class InserisciPartecipanteInterfaccia {
 					String str= (String) cb.getSelectedItem();
 				
 				switch(str) {
-					case "Squadra" : {
-						
+					case "Squadra" : {	
 						JLabel label2=new JLabel("Inserisci il Nome");
 						JTextField nome=new JTextField(20);
 						JLabel label3=new JLabel("Inserisci il Cognome");

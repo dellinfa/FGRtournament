@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -18,6 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import connessioniClassiDataBase.ConnesioneGiocatore;
 
 public class InserisciPartecipanteInterfaccia {
 	
@@ -53,47 +56,48 @@ public class InserisciPartecipanteInterfaccia {
 				
 				switch(str) {
 					case "Squadra" : {	
-						JLabel label2=new JLabel("Inserisci il Nome");
+						JLabel label2=new JLabel("Inserisci il nome");
 						JTextField nome=new JTextField(20);
 						JLabel label3=new JLabel("Inserisci il Cognome");
 						JTextField cognome=new JTextField(20);
-						JLabel label4=new JLabel("Inserisci il codiceFiscale");
-						JTextField codiceFiscale=new JTextField(20);
-						JLabel label5=new JLabel("Inserisci la tua email");
-						JTextField email=new JTextField(20);
-						JLabel label6=new JLabel("Inserisci il tuo username");
-						JTextField username=new JTextField(20);
-						JLabel label7=new JLabel("Inserisci una password");
-						JPasswordField password1=new JPasswordField(20);
-						JLabel label8=new JLabel("Inserisci di nuovo la password");
-						JPasswordField password2=new JPasswordField(20);
-						JLabel label9=new JLabel("(Solo se Impiegato o Amministratore) Inserisci il codice di sicurezza");
-						JPasswordField password3=new JPasswordField(20);
-						JLabel label10=new JLabel("(Solo se Impiegato o Amministratore) Inserisci nuovamente il codice di sicurezza");
-						JPasswordField password4=new JPasswordField(20);
-						JTextField indirizzo=new JTextField(20);
-						JLabel label11=new JLabel("Inserisci il tuo indirizzo");
+						JLabel label4=new JLabel("Inserisci la data di nascita");
+						JTextField dataNascita=new JTextField(20);
+						JLabel label5=new JLabel("Inserisci l'anno di immatricolazione");
+						JTextField annoImm=new JTextField(20);
+						JLabel label6=new JLabel("Inserisci anno corso");
+						JTextField annoCorso=new JTextField(20);
+						JLabel label7=new JLabel("Inserisci la matricola(5 CHAR)");
+						JPasswordField matricola=new JPasswordField(20);
+						
+						String a = nome.getText();
+						String b = cognome.getText();
+						String c = dataNascita.getText();
+						String d = annoImm.getText();
+						String g = annoCorso.getText();
+						String f = matricola.getText();
+						
+						ConnesioneGiocatore cg = new ConnesioneGiocatore();
+						
+						try {
+							cg.save(a, b, c, d, g, f);
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+					
+						panel2.add(listaProfili,BorderLayout.NORTH);
 						
 						panel3.add(label2);
 						panel3.add(nome);
 						panel3.add(label3);
 						panel3.add(cognome);
 						panel3.add(label4);
-						panel3.add(codiceFiscale);
-						panel3.add(label11);
-						panel3.add(indirizzo);
+						panel3.add(dataNascita);
 						panel3.add(label5);
-						panel3.add(email);
+						panel3.add(annoImm);
 						panel3.add(label6);
-						panel3.add(username);
+						panel3.add(annoCorso);
 						panel3.add(label7);
-						panel3.add(password1);
-						panel3.add(label8);
-						panel3.add(password2);
-						panel3.add(label9);
-						panel3.add(password3);
-						panel3.add(label10);
-						panel3.add(password4);
+						panel3.add(matricola);
 						
 						panel2.add(panel3);
 						frame.add(panel2,BorderLayout.CENTER);
@@ -112,7 +116,7 @@ public class InserisciPartecipanteInterfaccia {
 							public void actionPerformed(ActionEvent e){
 								try{
 									
-								int codiceSicurezza=Integer.parseInt(new String(password3.getPassword()));
+								// int codiceSicurezza=Integer.parseInt(new String(password3.getPassword()));
 			/*					if(new String(password1.getPassword()).equals(new String(password2.getPassword())))
 									if(new String(password3.getPassword()).equals(new String(password4.getPassword())))
 									if(listaProfili.getSelectedItem().equals("Amministratore"))
@@ -146,27 +150,34 @@ public class InserisciPartecipanteInterfaccia {
 						frame.setVisible(true);
 					}
 					case "Giocatore" :{
-						JLabel label2=new JLabel("Inserisci il CAZZOOOOOOOOOOOOO");
+						JLabel label2=new JLabel("Inserisci il nome");
 						JTextField nome=new JTextField(20);
 						JLabel label3=new JLabel("Inserisci il Cognome");
 						JTextField cognome=new JTextField(20);
-						JLabel label4=new JLabel("Inserisci il codiceFiscale");
-						JTextField codiceFiscale=new JTextField(20);
-						JLabel label5=new JLabel("Inserisci la tua email");
-						JTextField email=new JTextField(20);
-						JLabel label6=new JLabel("Inserisci il tuo username");
-						JTextField username=new JTextField(20);
-						JLabel label7=new JLabel("Inserisci una password");
-						JPasswordField password1=new JPasswordField(20);
-						JLabel label8=new JLabel("Inserisci di nuovo la password");
-						JPasswordField password2=new JPasswordField(20);
-						JLabel label9=new JLabel("(Solo se Impiegato o Amministratore) Inserisci il codice di sicurezza");
-						JPasswordField password3=new JPasswordField(20);
-						JLabel label10=new JLabel("(Solo se Impiegato o Amministratore) Inserisci nuovamente il codice di sicurezza");
-						JPasswordField password4=new JPasswordField(20);
-						JTextField indirizzo=new JTextField(20);
-						JLabel label11=new JLabel("Inserisci il tuo indirizzo");
+						JLabel label4=new JLabel("Inserisci la data di nascita");
+						JTextField dataNascita=new JTextField(20);
+						JLabel label5=new JLabel("Inserisci l'anno di immatricolazione");
+						JTextField annoImm=new JTextField(20);
+						JLabel label6=new JLabel("Inserisci anno corso");
+						JTextField annoCorso=new JTextField(20);
+						JLabel label7=new JLabel("Inserisci la matricola(5 CHAR)");
+						JPasswordField matricola=new JPasswordField(20);
 						
+						String a = nome.getText();
+						String b = cognome.getText();
+						String c = dataNascita.getText();
+						String d = annoImm.getText();
+						String g = annoCorso.getText();
+						String f = matricola.getText();
+						
+						ConnesioneGiocatore cg = new ConnesioneGiocatore();
+						
+						try {
+							cg.save(a, b, c, d, g, f);
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+					
 						panel2.add(listaProfili,BorderLayout.NORTH);
 						
 						panel3.add(label2);
@@ -174,21 +185,14 @@ public class InserisciPartecipanteInterfaccia {
 						panel3.add(label3);
 						panel3.add(cognome);
 						panel3.add(label4);
-						panel3.add(codiceFiscale);
-						panel3.add(label11);
-						panel3.add(indirizzo);
+						panel3.add(dataNascita);
 						panel3.add(label5);
-						panel3.add(email);
+						panel3.add(annoImm);
 						panel3.add(label6);
-						panel3.add(username);
+						panel3.add(annoCorso);
 						panel3.add(label7);
-						panel3.add(password1);
-						panel3.add(label8);
-						panel3.add(password2);
-						panel3.add(label9);
-						panel3.add(password3);
-						panel3.add(label10);
-						panel3.add(password4);
+						panel3.add(matricola);
+						
 						
 						panel2.add(panel3);
 						frame.add(panel2,BorderLayout.CENTER);
@@ -207,7 +211,7 @@ public class InserisciPartecipanteInterfaccia {
 							public void actionPerformed(ActionEvent e){
 								try{
 									
-								int codiceSicurezza=Integer.parseInt(new String(password3.getPassword()));
+								//int codiceSicurezza=Integer.parseInt(new String(password3.getPassword()));
 			/*					if(new String(password1.getPassword()).equals(new String(password2.getPassword())))
 									if(new String(password3.getPassword()).equals(new String(password4.getPassword())))
 									if(listaProfili.getSelectedItem().equals("Amministratore"))
@@ -252,21 +256,7 @@ public class InserisciPartecipanteInterfaccia {
 		
 	}
 
-//	String a = nome.getText();
-//	String b = cognome.getText();
-//	String c = dataNascita.getText();
-//	String d = annoImm.getText();
-//	String g = annoCorso.getText();
-//	String f = matricola.getText();
-//	
-//	ConnesioneGiocatore cg = new ConnesioneGiocatore();
-//	
-//	try {
-//		cg.save(a, b, c, d, g, f);
-//	} catch (SQLException e1) {
-//		e1.printStackTrace();
-//	}
-//}
+
 	private JFrame frame;
 
 }

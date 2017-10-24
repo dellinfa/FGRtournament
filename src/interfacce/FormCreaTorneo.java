@@ -64,7 +64,7 @@ public class FormCreaTorneo {
 		
 		JLabel label2=new JLabel("Sport");
 		JTextField sport =new JTextField(20);
-		JLabel label3=new JLabel("Modalitï¿½ svolgimento incontro");
+		JLabel label3=new JLabel("Modalità svolgimento incontro");
 		JRadioButton modSvolgimentoIncontroSingola =new JRadioButton("Singola");
 		JRadioButton modSvolgimentoIncontroSquadra =new JRadioButton("Squadra");
 		ButtonGroup group= new ButtonGroup();
@@ -75,7 +75,7 @@ public class FormCreaTorneo {
 		JLabel label8=new JLabel("Numero massimo di partecipanti");
 		String[] numMaxPartecipanti  = new String[] {"2", "4", "6", "8", "10"};
 		JComboBox<String> cbMaxPartecipanti = new JComboBox<>(numMaxPartecipanti);
-		JLabel label4=new JLabel("Modalitï¿½ attribuzione punti (Vincente-Pareggio-Perdente)");
+		JLabel label4=new JLabel("Modalità attribuzione punti (Vincente-Pareggio-Perdente)");
 		String[] modAttribuzionePt  = new String[]{"0", "1", "2"};
 		JComboBox<String> cbAttribuzionePt = new JComboBox<>(modAttribuzionePt);
 		JTextField modAttribuzioniPt=new JTextField(20);

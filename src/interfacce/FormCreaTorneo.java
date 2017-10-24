@@ -10,7 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Date;
+import java.util.Enumeration;
+import java.sql.SQLException;
 
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -28,6 +32,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
+
+import commons.Calendario;
+import connessioniClassiDataBase.ConnessioneTorneo;
 
 public class FormCreaTorneo {
 	
@@ -57,7 +64,7 @@ public class FormCreaTorneo {
 		
 		JLabel label2=new JLabel("Sport");
 		JTextField sport =new JTextField(20);
-		JLabel label3=new JLabel("Modalità svolgimento incontro");
+		JLabel label3=new JLabel("Modalitï¿½ svolgimento incontro");
 		JRadioButton modSvolgimentoIncontroSingola =new JRadioButton("Singola");
 		JRadioButton modSvolgimentoIncontroSquadra =new JRadioButton("Squadra");
 		ButtonGroup group= new ButtonGroup();
@@ -68,8 +75,8 @@ public class FormCreaTorneo {
 		JLabel label8=new JLabel("Numero massimo di partecipanti");
 		String[] numMaxPartecipanti  = new String[] {"2", "4", "6", "8", "10"};
 		JComboBox<String> cbMaxPartecipanti = new JComboBox<>(numMaxPartecipanti);
-		JLabel label4=new JLabel("Modalità attribuzione punti (Vincente-Pareggio-Perdente)");
-		String[] modAttribuzionePt  = new String[] {"3 1 0", "2 0 0", "1 0 0"};
+		JLabel label4=new JLabel("Modalitï¿½ attribuzione punti (Vincente-Pareggio-Perdente)");
+		String[] modAttribuzionePt  = new String[]{"0", "1", "2"};
 		JComboBox<String> cbAttribuzionePt = new JComboBox<>(modAttribuzionePt);
 		JTextField modAttribuzioniPt=new JTextField(20);
 		JLabel label5=new JLabel("Intervallo tempo");
@@ -116,6 +123,35 @@ public class FormCreaTorneo {
 			public void actionPerformed(ActionEvent e) {
 				new ElencoTorneiInterface();
 				frame.setVisible(false);
+				
+				
+				String sp,mAPG,mSI;
+				int maxP,inT;
+				Calendario C = new Calendario(null, null);
+				Date dI,dF ;
+				
+				
+				
+				sp=sport.getText();
+				maxP = cbMaxPartecipanti.getX();
+				inT = intervalloTempo.getX();
+				dI = dateChooser.getDate();
+				dF = dateChooser1.getDate();
+				mAPG = cbAttribuzionePt.getSelectedItem().toString() ;
+				mSI = group.toString();
+				System.out.println(mSI);
+				
+				ConnessioneTorneo cg = new ConnessioneTorneo();
+				
+
+				try {
+					cg.saveTorneo(mSI,mAPG,maxP,inT,dI,dF,C.toString(),sp);
+					System.out.println("okokokok");
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			
+				
 			}
 		};
 		

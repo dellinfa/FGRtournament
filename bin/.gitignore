@@ -1,7 +1,3 @@
-/interfacce/
-<<<<<<< HEAD
-=======
-/commons/
-
 /connessioniClassiDataBase/
->>>>>>> branch 'master' of https://github.com/dellinfa/FGRtournament.git
+/interfacce/
+/gestori/

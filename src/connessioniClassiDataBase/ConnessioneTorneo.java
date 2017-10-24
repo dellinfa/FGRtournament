@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
+
+import javax.swing.AbstractButton;
 
 import commons.Calendario;
 import commons.Classifica;
@@ -12,28 +15,27 @@ import commons.Partecipante;
 import gestori.GestoreDatiPersistenti;
 
 public class ConnessioneTorneo {
-		public void saveTorneo(Enum modSvolgimentoIncontro,String modIscrizione,Enum modAttribuzionePtGara, int maxPartecipanti,
-				int intervalloTempo, Date dataInizioTorneo, Date dataFineTorneo, Calendario calendario,
-				Classifica classifica, ArrayList<Partecipante> listPartecipanti, String sport)throws SQLException{
+		public void saveTorneo(String modSvolgimentoIncontro,String modAttribuzionePtGara, int maxPartecipanti,
+				int intervalloTempo,Date dataInizioTorneo, Date dataFineTorneo, String calendario, String sport)throws SQLException{
 			Connection con = null;
 			PreparedStatement ps = null;
 			
-			String insertMySql = "INSERT INTO tornei(modIscrizione,modSvolgimentoTorneo,modAttribuzionePunti,maxPartecipanti,intervalloTempo,dataInizio,dataFine,tipologiaTornei,calendario) VALUES(?,?,?,?,?,?,?,?,?)";
+			String insertMySql = "INSERT INTO tornei(modSvolgimentoTorneo,modAttrbuzionePunti,maxPartecipanti,intervalloTempo,dataInizio,dataFine,sport,calendario) VALUES(?,?,?,?,?,?,?,?)";
 			
 			try {
 				con = GestoreDatiPersistenti.getConnection();
 				ps= con.prepareStatement(insertMySql);
-				ps.setString(1,modIscrizione);
-				ps.setObject(2,modSvolgimentoIncontro);
-				ps.setObject(3,modAttribuzionePtGara);
-				ps.setInt(4,maxPartecipanti);
-				ps.setInt(5,intervalloTempo);
-				ps.setDate(6,(java.sql.Date) dataInizioTorneo);
-				ps.setDate(7,(java.sql.Date) dataFineTorneo);
-				ps.setString(8,sport);
-				ps.setObject(9,calendario);
+				ps.setString(1,modSvolgimentoIncontro);
+				ps.setString(2,modAttribuzionePtGara);
+				ps.setInt(3,maxPartecipanti);
+				ps.setInt(4,intervalloTempo);
+				java.sql.Date dataInizio = new java.sql.Date(dataInizioTorneo.getDate());
+				java.sql.Date dataFine = new java.sql.Date(dataFineTorneo.getDate());
+				ps.setDate(5,dataInizio);
+				ps.setDate(6,dataFine);
+				ps.setString(7,sport);
+				ps.setObject(8,calendario);
 
-				
 				ps.executeUpdate();
 				
 			}finally {
@@ -47,5 +49,6 @@ public class ConnessioneTorneo {
 				}
 					}
 			}
-	}
+
+}
 

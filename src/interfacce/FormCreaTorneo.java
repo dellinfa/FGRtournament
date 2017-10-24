@@ -49,7 +49,6 @@ public class FormCreaTorneo {
 		JLabel label1= new JLabel("Compila i campi");
 		panel1.add(label1);
 		frame.add(panel1, BorderLayout.NORTH);
-	
 		
 		JPanel panel2=new JPanel();
 		panel2.setLayout(new BorderLayout());
@@ -90,7 +89,6 @@ public class FormCreaTorneo {
 		dateChooser1.setDateFormatString("dd/MM/yyyy");
 		dateChooser1.setBounds(588, 59, 163, 40);
 		
-
 		panel3.add(label2);
 		panel3.add(sport);
 		panel3.add(label3);
@@ -105,11 +103,7 @@ public class FormCreaTorneo {
 		panel3.add(label4);
 		panel3.add(cbAttribuzionePt);
 		panel3.add(label5);
-		panel3.add(intervalloTempo);
-		
-		
-		
-		
+		panel3.add(intervalloTempo);	
 		
 		ActionListener back=new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -154,8 +148,7 @@ public class FormCreaTorneo {
 				
 			}
 		};
-		
-		
+			
 		buttonCrea.addActionListener(crea);	// deve anche aggiungere il tonreo al db
 		buttonIndietro.addActionListener(back);
 		panel2.add(panel3);

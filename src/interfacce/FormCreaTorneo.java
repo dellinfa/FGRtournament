@@ -13,6 +13,7 @@ import java.awt.event.ItemListener;
 import java.util.Date;
 import java.util.Enumeration;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
@@ -121,19 +122,26 @@ public class FormCreaTorneo {
 				
 				String sp,mAPG,mSI;
 				int maxP,inT;
+				String prova;
 				Calendario C = new Calendario(null, null);
-				Date dI,dF ;
+				Date dI,dF;
 				
 				
 				
 				sp=sport.getText();
-				maxP = cbMaxPartecipanti.getX();
-				inT = intervalloTempo.getX();
+				maxP = Integer.parseInt((String) cbMaxPartecipanti.getSelectedItem());
+				inT =Integer.parseInt((intervalloTempo.getText())) ;
 				dI = dateChooser.getDate();
 				dF = dateChooser1.getDate();
+				prova = dI.toString();
+				
+				
 				mAPG = cbAttribuzionePt.getSelectedItem().toString() ;
-				mSI = group.toString();
-				System.out.println(mSI);
+				if(modSvolgimentoIncontroSingola.isSelected())
+					mSI = modSvolgimentoIncontroSingola.getText();
+				else
+					mSI = modSvolgimentoIncontroSquadra.getText();
+				System.out.println(prova);
 				
 				ConnessioneTorneo cg = new ConnessioneTorneo();
 				
@@ -142,6 +150,9 @@ public class FormCreaTorneo {
 					cg.saveTorneo(mSI,mAPG,maxP,inT,dI,dF,C.toString(),sp);
 					System.out.println("okokokok");
 				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			

@@ -3,6 +3,8 @@ package connessioniClassiDataBase;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
@@ -15,10 +17,13 @@ import commons.Partecipante;
 import gestori.GestoreDatiPersistenti;
 
 public class ConnessioneTorneo {
+	
 		public void saveTorneo(String modSvolgimentoIncontro,String modAttribuzionePtGara, int maxPartecipanti,
-				int intervalloTempo,Date dataInizioTorneo, Date dataFineTorneo, String calendario, String sport)throws SQLException{
+				int intervalloTempo,Date dataInizioTorneo, Date dataFineTorneo, String calendario, String sport)throws SQLException, ParseException{
 			Connection con = null;
 			PreparedStatement ps = null;
+			String data=dataInizioTorneo.toString();
+			
 			
 			String insertMySql = "INSERT INTO tornei(modSvolgimentoTorneo,modAttrbuzionePunti,maxPartecipanti,intervalloTempo,dataInizio,dataFine,sport,calendario) VALUES(?,?,?,?,?,?,?,?)";
 			
@@ -29,8 +34,9 @@ public class ConnessioneTorneo {
 				ps.setString(2,modAttribuzionePtGara);
 				ps.setInt(3,maxPartecipanti);
 				ps.setInt(4,intervalloTempo);
-				java.sql.Date dataInizio = new java.sql.Date(dataInizioTorneo.getDate());
-				java.sql.Date dataFine = new java.sql.Date(dataFineTorneo.getDate());
+				java.sql.Date dataInizio = new java.sql.Date(dataInizioTorneo.getTime());
+				java.sql.Date dataFine = new java.sql.Date(dataFineTorneo.getTime());
+				System.out.print(data);
 				ps.setDate(5,dataInizio);
 				ps.setDate(6,dataFine);
 				ps.setString(7,sport);

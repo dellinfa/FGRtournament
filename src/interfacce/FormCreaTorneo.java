@@ -140,7 +140,7 @@ public class FormCreaTorneo {
 				mAPG = cbAttribuzionePt.getSelectedItem().toString() ;
 				mSI = group.toString();
 				System.out.println(mSI);
-				
+				//aaaaa
 				ConnessioneTorneo cg = new ConnessioneTorneo();
 				
 

@@ -1,15 +1,16 @@
 
 package interfacce;
 
-
 import java.awt.BorderLayout;
 import java.awt.Checkbox;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.RadialGradientPaint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.sql.SQLException;
@@ -34,18 +35,22 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import Controller.ControllerTorneo;
 import commons.Calendario;
 import connessioniClassiDataBase.ConnessioneTorneo;
 
 public class FormCreaTorneo {
-	
-	public FormCreaTorneo() {
+
+	private ElencoTorneiInterface et;
+
+	public FormCreaTorneo() throws HeadlessException, ParseException {
 		
 		frame= new JFrame("FGRtournament");
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocation(400, 100);
 		
+		et = ElencoTorneiInterface.getInstance();
 		JPanel panel1= new JPanel();
 		JLabel label1= new JLabel("Compila i campi");
 		panel1.add(label1);
@@ -108,7 +113,12 @@ public class FormCreaTorneo {
 		
 		ActionListener back=new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				new ElencoTorneiInterface();
+				try {
+					new ElencoTorneiInterface();
+				} catch (ParseException e1) {
+					
+					e1.printStackTrace();
+				}
 				frame.setVisible(false);
 			}
 		};
@@ -116,8 +126,7 @@ public class FormCreaTorneo {
 
 		ActionListener crea=new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				new ElencoTorneiInterface();
-				frame.setVisible(false);
+				
 				
 				
 				String sp,mAPG,mSI;
@@ -129,38 +138,88 @@ public class FormCreaTorneo {
 				
 				
 				sp=sport.getText();
-				maxP = Integer.parseInt((String) cbMaxPartecipanti.getSelectedItem());
-				inT =Integer.parseInt((intervalloTempo.getText())) ;
-				dI = dateChooser.getDate();
-				dF = dateChooser1.getDate();
-				prova = dI.toString();
-				
-				
-				mAPG = cbAttribuzionePt.getSelectedItem().toString() ;
-				if(modSvolgimentoIncontroSingola.isSelected())
-					mSI = modSvolgimentoIncontroSingola.getText();
-				else
-					mSI = modSvolgimentoIncontroSquadra.getText();
-				System.out.println(prova);
-				
-				ConnessioneTorneo cg = new ConnessioneTorneo();
-				
-
-				try {
-					cg.saveTorneo(mSI,mAPG,maxP,inT,dI,dF,C.toString(),sp);
-					System.out.println("okokokok");
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				} catch (ParseException e1) {
+				if(sport.getText().equalsIgnoreCase("calcio") || sport.getText().equalsIgnoreCase("pallavolo") ||
+					sport.getText().equalsIgnoreCase("basket") || sport.getText().equalsIgnoreCase("ping pong")) {
 					
-					e1.printStackTrace();
-				}
-			
+					
+					
+					maxP = Integer.parseInt((String) cbMaxPartecipanti.getSelectedItem());
+					inT =Integer.parseInt((intervalloTempo.getText())) ;
+					dI = dateChooser.getDate();
+					
+					Calendar today = Calendar.getInstance();	
+					int day =  today.get(Calendar.DAY_OF_MONTH);
+					int month= today.get(Calendar.MONTH);
+					int year= today.get(Calendar.YEAR);
+					
+					Calendar dICal = Calendar.getInstance();	
+					int dayI =  dICal.get(Calendar.DAY_OF_MONTH);
+					int monthI= dICal.get(Calendar.MONTH);
+					int yearI= dICal.get(Calendar.YEAR);
 				
+					//se il giorno della prenotazione Ã¨ antecedente a quello odierno
+					if(dICal.before(new Date())){
+						ControllerTorneo.visualizzaErrore("La data di inizio torneo è antecedente a quella odierna!");
+						return;
+					}
+					
+					dF = dateChooser1.getDate();
+					Calendar dFCal = Calendar.getInstance();	
+					dFCal.setTime(dF);
+					int dayF =  dFCal.get(Calendar.DAY_OF_MONTH);
+					int monthF= dFCal.get(Calendar.MONTH);
+					int yearF= dFCal.get(Calendar.YEAR);
+					
+				
+					//se il giorno della prenotazione Ã¨ antecedente a quello odierno
+					if(dFCal.before(new Date())|| dF.before(dI)){
+						ControllerTorneo.visualizzaErrore("La data di fine torneo è errata!");
+						return;
+					}
+					
+					
+					mAPG = cbAttribuzionePt.getSelectedItem().toString() ;
+					if(modSvolgimentoIncontroSingola.isSelected())
+						mSI = modSvolgimentoIncontroSingola.getText();
+					else
+						mSI = modSvolgimentoIncontroSquadra.getText();
+					
+					ConnessioneTorneo cg = new ConnessioneTorneo();
+					try {
+						cg.saveTorneo(mSI,mAPG,maxP,inT,dI,dF,C.toString(),sp);
+						System.out.println("Aggiunto nel database");
+					} catch (SQLException e1) {
+						ControllerTorneo.visualizzaErrore("Impossibile creare torneo!");
+					} catch (ParseException e1) {
+						ControllerTorneo.visualizzaErrore("Impossibile creare torneo!");
+
+					}
+					try {
+						et.aggiornaComboBox();
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					et.frame.pack();
+					et.frame.setVisible(true);
+					frame.setVisible(false);
+					
+				
+				}else {
+					try {
+						new FormCreaTorneo();
+					} catch (HeadlessException | ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					frame.setVisible(false);
+					JOptionPane.showMessageDialog(null, "Torneo non concesso!", "ErroreTorneo", JOptionPane.ERROR_MESSAGE);
+				
+				}
 			}
 		};
-			
-		buttonCrea.addActionListener(crea);	// deve anche aggiungere il tonreo al db
+		
+		buttonCrea.addActionListener(crea);	
 		buttonIndietro.addActionListener(back);
 		panel2.add(panel3);
 		frame.add(panel3,BorderLayout.CENTER);
@@ -168,8 +227,8 @@ public class FormCreaTorneo {
 		frame.setVisible(true);
 		frame.setSize(500,600);
 	}
+
 	private JFrame frame;
-	private JList maxPartecipantiList; 
+	private JList maxPartecipantiList;
 
 }
-

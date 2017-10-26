@@ -24,6 +24,8 @@ import connessioniClassiDataBase.ConnesioneGiocatore;
 
 public class InserisciPartecipanteInterfaccia {
 	
+	
+	
 	public InserisciPartecipanteInterfaccia() {
 		
 		frame= new JFrame("FGRtournament");
@@ -32,7 +34,6 @@ public class InserisciPartecipanteInterfaccia {
 		frame.setLocation(250, 250);
 		
 		
-	
 		
 	
 	

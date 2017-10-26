@@ -5,7 +5,8 @@
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 	import java.awt.event.ActionListener;
-	import java.util.ArrayList;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 	import javax.swing.JButton;
 	import javax.swing.JFrame;
@@ -52,7 +53,12 @@ import java.awt.event.ActionEvent;
 			ActionListener elencoTorneoInterface = new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					 intro.setVisible(false);
-					 new ElencoTorneiInterface();
+					 try {
+						new ElencoTorneiInterface();
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			};
 			

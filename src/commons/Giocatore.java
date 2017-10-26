@@ -13,7 +13,7 @@ public class Giocatore extends Partecipante{
 		this.annoCorso=annoCorso;
 		this.matricola=matricola;
 	}
-	// provaaaaaaa Rinaldo /gay capo degli ebrei
+
 
 	public String getMatricola() {
 		return matricola;

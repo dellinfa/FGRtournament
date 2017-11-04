@@ -15,10 +15,7 @@ import javax.swing.JPanel;
 
 public class MenuPrincipale {
 
-	public void prendiSport(String sport) {
-		
-				
-	}
+	
 	
 	public MenuPrincipale(String sport) {
 		this.sport = sport;
@@ -45,9 +42,6 @@ public class MenuPrincipale {
 		JButton inserisciPartecipante = new JButton("Inserisci partecipante");
 		panel2.add(inserisciPartecipante);
 
-		JButton creaCalendario = new JButton(" Crea calendario");
-		panel2.add(creaCalendario);
-
 		JPanel panel3 = new JPanel();
 		panel3.setLayout(new GridLayout(1, 1));
 		JButton indietro = new JButton("Indietro");
@@ -57,7 +51,12 @@ public class MenuPrincipale {
 		ActionListener cale = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new CalendarioInterface();
+				try {
+					new CalendarioInterface();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		};
 
@@ -74,9 +73,12 @@ public class MenuPrincipale {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				try {
-					new InserisciPartecipanteInterfaccia();
+					new InserisciPartecipanteInterface();
 				} catch (HeadlessException e1) {
 					e1.printStackTrace();
+				} catch (ParseException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
 				}
 			}
 			

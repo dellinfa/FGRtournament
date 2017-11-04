@@ -5,12 +5,9 @@ import java.util.Date;
 
 public class Calendario {
 	
-	
-	//Creare ALGORITMO per la creazione del calendario
-	
-		public Calendario(Date dataSvolgimento, ArrayList<Partita> partite) {
+		public Calendario(Date dataSvolgimento, ArrayList<Partita> listPartite) {
 		this.dataSvolgimento = dataSvolgimento;
-		this.partite = partite;
+		this.listPartite = listPartite;
 	}
 		
 		public Date getDataSvolgimento() {
@@ -21,11 +18,11 @@ public class Calendario {
 			this.dataSvolgimento = dataSvolgimento;
 		}
 		
-		public void addPartita(ArrayList<Partita> partite) {
-			this.partite = partite;
+		public void addPartita(ArrayList<Partita> listPartite) {
+			this.listPartite = listPartite;
 		}
 
 
 	private Date dataSvolgimento;
-	private ArrayList<Partita> partite;
+	private ArrayList<Partita> listPartite;
 }

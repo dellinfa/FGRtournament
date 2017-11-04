@@ -2,32 +2,39 @@ package commons;
 
 public class Partita {
 
-	public Partita(Partecipante partecipante1, Partecipante partecipante2, int risultatoPartecipante1,
-			int risultatoPartecipante2, Enum stato) {
-		this.partecipante1 = partecipante1;
-		this.partecipante2 = partecipante2;
-		this.risultatoPartecipante1 = risultatoPartecipante1;
-		this.risultatoPartecipante2 = risultatoPartecipante2;
-		this.stato = stato;
+	public Partita(int risultatoPartecipanteCasa, int risultatoPartecipanteOspite, Partecipante partecipanteCasa, Partecipante partecipanteOspite) {
+		this.partecipanteCasa = partecipanteCasa;
+		this.partecipanteOspite = partecipanteOspite;
+		this.risultatoPartecipanteCasa = risultatoPartecipanteCasa;
+		this.risultatoPartecipanteOspite = risultatoPartecipanteOspite;
+		
 	}	
 	
-	public int getRisultatoPartecipante1() {
-		return risultatoPartecipante1;
+	public Partecipante getPartecipanteCasa() {
+		return partecipanteCasa;
 	}
-	public void setRisultatoPartecipante1(int risultatoPartecipante1) {
-		this.risultatoPartecipante1 = risultatoPartecipante1;
+	public void setPartecipanteCasa(Partecipante partecipanteCasa) {
+		this.partecipanteCasa = partecipanteCasa;
 	}
-	public int getRisultatoPartecipante2() {
-		return risultatoPartecipante2;
+	public Partecipante getPartecipanteOspite() {
+		return partecipanteOspite;
 	}
-	public void setRisultatoPartecipante2(int risultatoPartecipante2) {
-		this.risultatoPartecipante2 = risultatoPartecipante2;
+	public void setPartecipanteOspite(Partecipante partecipanteOspite) {
+		this.partecipanteOspite = partecipanteOspite;
+	}
+	public int getRisultatoPartecipanteCasa() {
+		return risultatoPartecipanteCasa;
+	}
+	public void setRisultatoPartecipanteCasa(int risultatoPartecipanteCasa) {
+		this.risultatoPartecipanteCasa = risultatoPartecipanteCasa;
+	}
+	public int getRisultatoPartecipanteOspite() {
+		return risultatoPartecipanteOspite;
+	}
+	public void setRisultatoPartecipanteOspite(int risultatoPartecipanteOspite) {
+		this.risultatoPartecipanteOspite = risultatoPartecipanteOspite;
 	}
 
-
-
-
-	private Partecipante partecipante1, partecipante2;
-	private int risultatoPartecipante1, risultatoPartecipante2;
-	private Enum stato;
+	private Partecipante partecipanteCasa, partecipanteOspite;
+	private int risultatoPartecipanteCasa, risultatoPartecipanteOspite;
 }

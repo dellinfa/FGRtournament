@@ -4,12 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
-
-import javax.swing.AbstractButton;
 
 import commons.Calendario;
 import commons.Classifica;
@@ -18,30 +14,27 @@ import gestori.GestoreDatiPersistenti;
 
 public class ConnessioneTorneo {
 	
-		public void saveTorneo(String modSvolgimentoIncontro,String modAttribuzionePtGara, int maxPartecipanti,
-				int intervalloTempo,Date dataInizioTorneo, Date dataFineTorneo, String calendario, String sport)throws SQLException, ParseException{
+		public void saveTorneo(String sport,String modSvolgimentoIncontro,String modAttribuzionePtGara, int numPartecipanti,
+				Date dataInizioTorneo, Date dataFineTorneo,String idCalendario, String idClassifica)throws SQLException, ParseException{
 			Connection con = null;
 			PreparedStatement ps = null;
-			String data=dataInizioTorneo.toString();
 			
 			
-			String insertMySql = "INSERT INTO tornei(modSvolgimentoTorneo,modAttrbuzionePunti,maxPartecipanti,intervalloTempo,dataInizio,dataFine,sport,calendario) VALUES(?,?,?,?,?,?,?,?)";
+			String insertMySql = "INSERT INTO torneo(sport,modSvolgimentoIncontro,modAttribuzionePtGara,numPartecipanti,dataInizioTorneo,dataFineTorneo,idCalendario,idClassifica) VALUES(?,?,?,?,?,?,?,?)";
 			
 			try {
 				con = GestoreDatiPersistenti.getConnection();
 				ps= con.prepareStatement(insertMySql);
-				ps.setString(1,modSvolgimentoIncontro);
-				ps.setString(2,modAttribuzionePtGara);
-				ps.setInt(3,maxPartecipanti);
-				ps.setInt(4,intervalloTempo);
+				ps.setString(1,sport);
+				ps.setString(2,modSvolgimentoIncontro);
+				ps.setString(3,modAttribuzionePtGara);
+				ps.setInt(4,numPartecipanti);
 				java.sql.Date dataInizio = new java.sql.Date(dataInizioTorneo.getTime());
 				java.sql.Date dataFine = new java.sql.Date(dataFineTorneo.getTime());
-				System.out.print(data);
 				ps.setDate(5,dataInizio);
 				ps.setDate(6,dataFine);
-				ps.setString(7,sport);
-				ps.setObject(8,calendario);
-
+				ps.setObject(7,idCalendario);
+				ps.setObject(8,idClassifica);
 				ps.executeUpdate();
 				
 			}finally {

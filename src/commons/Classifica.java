@@ -15,7 +15,7 @@ public class Classifica {
 	}
 	
 	public void addPartecipante(Partecipante partecipante) {
-		this.listPartecipanti.add(partecipante);//oooo
+		this.listPartecipanti.add(partecipante);
 	}
 	
 	public void removePartita(Partita partita) {

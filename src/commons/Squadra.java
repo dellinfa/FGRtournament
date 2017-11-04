@@ -4,17 +4,22 @@ import java.util.ArrayList;
 
 public class Squadra extends Partecipante{
 
-	public Squadra(String nome, int punti, int partiteGiocate, int partiteVinte, int partitePerse, int nComponenti,
+	public Squadra(String id, int punti, int partiteGiocate, int partiteVinte, int partitePerse, int nComponenti,
 			ArrayList<Giocatore> listGiocatori) {
-		super(nome, punti, partiteGiocate, partiteVinte, partitePerse);
+		super(id, punti, partiteGiocate, partiteVinte, partitePerse);
 	}
 
-	public void removeGiocatore(Giocatore giocatore) {
-		this.listGiocatori.remove(giocatore);
+	public int getnComponenti() {
+		return nComponenti;
 	}
-	
-	public void addGiocatore(Giocatore giocatore) {
-		this.listGiocatori.add(giocatore);
+	public void setnComponenti(int nComponenti) {
+		this.nComponenti = nComponenti;
+	}
+	public ArrayList<Giocatore> getListGiocatori() {
+		return listGiocatori;
+	}
+	public void setListGiocatori(ArrayList<Giocatore> listGiocatori) {
+		this.listGiocatori = listGiocatori;
 	}
 	
 	private int nComponenti;

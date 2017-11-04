@@ -1,0 +1,54 @@
+Giornata 1
+1) Foggia - Parma
+2) Genoa - Bologna
+3) Roma - Inter
+4) Palermo - Pescara
+5) Bari - Barcellona
+Giornata 2
+1) Bologna - Parma
+2) Foggia - Inter
+3) Genoa - Pescara
+4) Roma - Barcellona
+5) Palermo - Bari
+Giornata 3
+1) Inter - Parma
+2) Bologna - Pescara
+3) Foggia - Barcellona
+4) Genoa - Bari
+5) Roma - Palermo
+Giornata 4
+1) Pescara - Parma
+2) Inter - Barcellona
+3) Bologna - Bari
+4) Foggia - Palermo
+5) Genoa - Roma
+Giornata 5
+1) Barcellona - Parma
+2) Pescara - Bari
+3) Inter - Palermo
+4) Bologna - Roma
+5) Foggia - Genoa
+Giornata 6
+1) Bari - Parma
+2) Barcellona - Palermo
+3) Pescara - Roma
+4) Inter - Genoa
+5) Bologna - Foggia
+Giornata 7
+1) Palermo - Parma
+2) Bari - Roma
+3) Barcellona - Genoa
+4) Pescara - Foggia
+5) Inter - Bologna
+Giornata 8
+1) Roma - Parma
+2) Palermo - Genoa
+3) Bari - Foggia
+4) Barcellona - Bologna
+5) Pescara - Inter
+Giornata 9
+1) Genoa - Parma
+2) Roma - Foggia
+3) Palermo - Bologna
+4) Bari - Inter
+5) Barcellona - Pescara

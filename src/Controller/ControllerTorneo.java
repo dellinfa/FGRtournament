@@ -17,6 +17,9 @@ public class ControllerTorneo {
 	private static ControllerTorneo istanza;
 	private static GestoreDatiPersistenti dp;
 	private HashMap<String, Torneo> tornei;
+	private HashMap<String, Squadra> squadre;
+	private HashMap<String, Giocatore> giocatori;
+
 	
 	public static ControllerTorneo getInstance() throws ParseException {
 		if(istanza == null) 
@@ -34,6 +37,17 @@ public class ControllerTorneo {
 		return this.tornei;
 	}
 	
+
+	public HashMap<String, Squadra> getSquadre() throws ParseException{
+		squadre = dp.caricaSquadre();
+		return this.squadre;
+	}
+	
+	public HashMap<String, Giocatore> getGiocatori() throws ParseException{
+		giocatori = dp.caricaGiocatore();
+		return this.giocatori;
+	}
+	
 	
 	public Torneo creaTorneo() {
 		return null;
@@ -48,7 +62,6 @@ public class ControllerTorneo {
 	public static void visualizzaErrore(String errore) {
 		JOptionPane.showMessageDialog(null,errore,"Errore",JOptionPane.ERROR_MESSAGE);
 
-		
 	}
 	
 	

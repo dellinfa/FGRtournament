@@ -2,10 +2,14 @@ package connessioniClassiDataBase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import Controller.ControllerTorneo;
 import commons.Calendario;
 import commons.Classifica;
 import commons.Giocatore;
@@ -15,39 +19,85 @@ import gestori.GestoreDatiPersistenti;
 
 public class ConnessioneSquadre {
 
-	public void saveSquadra(String nome, int punti, int partiteGiocate, int partiteVinte, int partitePerse, int nComponenti,
-			ArrayList<Torneo> listTornei,ArrayList<Giocatore> listGiocatori)throws SQLException{
+	public void saveSquadra(String nome, int punti, int partiteGiocate, int partiteVinte, int partitePerse,
+			int nComponenti, Torneo torneo, ArrayList<Giocatore> listGiocatori) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		
-		String insertMySql = "INSERT INTO tornei(nome,punti,partiteGiocate,numeroPartiteVinte,numeroPartitePerse,numeroComponenti,torneo,giocatore) VALUES(?,?,?,?,?,?,?,?)";
-		
+
+		String insertMySql = "INSERT INTO squadra(id,punti,partiteGiocate,numeroPartiteVinte,numeroPartitePerse,numeroComponenti,torneo,giocatore) VALUES(?,?,?,?,?,?,?,?)";
+
 		try {
 			con = GestoreDatiPersistenti.getConnection();
-			ps= con.prepareStatement(insertMySql);
-			ps.setString(1,nome);
-			ps.setInt(2,punti);
-			ps.setInt(3,partiteGiocate);
-			ps.setInt(4,partiteVinte);
-			ps.setInt(5,partitePerse);
-			ps.setInt(6,nComponenti);
-			ps.setObject(7,listTornei);
-			ps.setObject(8,listGiocatori);
-			
+			ps = con.prepareStatement(insertMySql);
+			ps.setString(1, nome);
+			ps.setInt(2, punti);
+			ps.setInt(3, partiteGiocate);
+			ps.setInt(4, partiteVinte);
+			ps.setInt(5, partitePerse);
+			ps.setInt(6, nComponenti);
+			ps.setObject(7, torneo);
+			ps.setObject(8, listGiocatori);
 
-			
 			ps.executeUpdate();
-			
-		}finally {
+
+		} finally {
 			try {
-				if(ps!=null) {
+				if (ps != null) {
 					ps.close();
 				}
-			}finally {
-					if(con!=null)
-						con.close();
+			} finally {
+				if (con != null)
+					con.close();
 			}
-				}
 		}
-	
+	}
+
+	public static void setTorneoToSquadra(String squadra, String torneo) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		String insertMySql = "UPDATE squadra SET torneo = ? WHERE id = ?";
+
+		try {
+			con = GestoreDatiPersistenti.getConnection();
+			ps = con.prepareStatement(insertMySql);
+			ps.setString(1, torneo);
+			ps.setString(2, squadra);
+
+			ps.executeUpdate();
+
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} finally {
+				if (con != null)
+					con.close();
+			}
+		}
+	}
+
+//	public static String getTorneoFromSquadra(String squadra) throws SQLException {
+//		ResultSet rs = null;
+//		String stringSport = null;
+//		try {
+//
+//			rs = stm.executeQuery("select * from squadra");
+//			
+//			while (rs.next()) {
+//				stringSport = rs.getString("torneo");
+//
+//			}
+//		} catch (Exception e) {
+//			ControllerTorneo.visualizzaErrore("a");
+//
+//		}
+//
+//		return stringSport;
+//
+//	}
+//
+//	private static Statement stm;
+
 }

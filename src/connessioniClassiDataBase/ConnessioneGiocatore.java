@@ -7,12 +7,12 @@ import java.sql.PreparedStatement;
 
 import gestori.GestoreDatiPersistenti;
 
-public class ConnesioneGiocatore {
-	public void saveGiocatore(String nome,String cognome,Date dataNascita,int annoImm, String annoCorso,String id)throws SQLException{
+public class ConnessioneGiocatore {
+	public void saveGiocatore(String nome,String cognome,Date dataNascita,int annoImm, String annoCorso,String matricola)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		
-		String insertMySql = "INSERT INTO giocatori(nome,cognome,dataNascita,annoImmatricolazione,annoCorso,id) VALUES(?,?,?,?,?,?)";
+		String insertMySql = "INSERT INTO giocatori(nome,cognome,dataNascita,annoImmatricolazione,annoCorso,matricola) VALUES(?,?,?,?,?,?)";
 		
 		try {
 			con = GestoreDatiPersistenti.getConnection();
@@ -22,7 +22,7 @@ public class ConnesioneGiocatore {
 			java.sql.Date dataN = new java.sql.Date(dataNascita.getTime());
 			ps.setInt(4,annoImm);
 			ps.setString(5,annoCorso);
-			ps.setString(6,id);
+			ps.setString(6,matricola);
 			
 			ps.executeUpdate();
 			

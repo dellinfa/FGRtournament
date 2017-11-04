@@ -1,0 +1,9 @@
+Giornata 1
+1) Real Madrid - Cagliari
+2) PSG - Chievo
+Giornata 2
+1) Chievo - Cagliari
+2) Real Madrid - PSG
+Giornata 3
+1) PSG - Cagliari
+2) Chievo - Real Madrid

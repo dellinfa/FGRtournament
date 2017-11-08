@@ -5,24 +5,18 @@ import java.util.Date;
 
 public class Calendario {
 	
-		public Calendario(Date dataSvolgimento, ArrayList<Partita> listPartite) {
-		this.dataSvolgimento = dataSvolgimento;
-		this.listPartite = listPartite;
+	private String idCalendario;
+
+	public Calendario(String idCalendario) {
+		
+		this.idCalendario = idCalendario;
 	}
-		
-		public Date getDataSvolgimento() {
-			return dataSvolgimento;
-		}
-		
-		public void setDataSvolgimento(Date dataSvolgimento) {
-			this.dataSvolgimento = dataSvolgimento;
-		}
-		
-		public void addPartita(ArrayList<Partita> listPartite) {
-			this.listPartite = listPartite;
-		}
 
+	public String getIdCalendario() {
+		return idCalendario;
+	}
 
-	private Date dataSvolgimento;
-	private ArrayList<Partita> listPartite;
+	public void setIdCalendario(String idCalendario) {
+		this.idCalendario = idCalendario;
+	}
 }

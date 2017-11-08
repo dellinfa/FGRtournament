@@ -1,9 +1,20 @@
 Giornata 1
-1) Real Madrid - Cagliari
-2) PSG - Chievo
+1) Bari - Parma
+2) Barcellona - Bologna
+3) Pescara - Inter
 Giornata 2
-1) Chievo - Cagliari
-2) Real Madrid - PSG
+1) Bologna - Parma
+2) Bari - Inter
+3) Barcellona - Pescara
 Giornata 3
-1) PSG - Cagliari
-2) Chievo - Real Madrid
+1) Inter - Parma
+2) Bologna - Pescara
+3) Bari - Barcellona
+Giornata 4
+1) Pescara - Parma
+2) Inter - Barcellona
+3) Bologna - Bari
+Giornata 5
+1) Barcellona - Parma
+2) Pescara - Bari
+3) Inter - Bologna

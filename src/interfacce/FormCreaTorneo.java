@@ -125,8 +125,8 @@ public class FormCreaTorneo {
 				String sp, mAPG, mSI;
 				int numP;
 				String prova;
-				Calendario Cal = new Calendario(null, null);
-				Classifica Cla = new Classifica(null, null);
+				Calendario Cal = new Calendario(null);
+				Classifica Cla = new Classifica(null);
 				Date dI, dF;
 
 				sp = sport.getText();

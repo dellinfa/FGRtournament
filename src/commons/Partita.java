@@ -2,26 +2,57 @@ package commons;
 
 public class Partita {
 
-	public Partita(int risultatoPartecipanteCasa, int risultatoPartecipanteOspite, Partecipante partecipanteCasa, Partecipante partecipanteOspite) {
-		this.partecipanteCasa = partecipanteCasa;
-		this.partecipanteOspite = partecipanteOspite;
+	public Partita(int risultatoPartecipanteCasa, int risultatoPartecipanteOspite, String idPartita, String idPartecipanteCasa, String idPartecipanteOspite, String idCalendario) {
+		this.idPartecipanteCasa = idPartecipanteCasa;
+		this.idPartecipanteOspite = idPartecipanteOspite;
+		this.idPartita=idPartita;
 		this.risultatoPartecipanteCasa = risultatoPartecipanteCasa;
 		this.risultatoPartecipanteOspite = risultatoPartecipanteOspite;
+		this.idCalendario= idCalendario;
 		
 	}	
 	
-	public Partecipante getPartecipanteCasa() {
-		return partecipanteCasa;
+	
+	public String getIdPartecipanteCasa() {
+		return idPartecipanteCasa;
 	}
-	public void setPartecipanteCasa(Partecipante partecipanteCasa) {
-		this.partecipanteCasa = partecipanteCasa;
+
+
+	public void setIdPartecipanteCasa(String idPartecipanteCasa) {
+		this.idPartecipanteCasa = idPartecipanteCasa;
 	}
-	public Partecipante getPartecipanteOspite() {
-		return partecipanteOspite;
+
+
+	public String getIdPartecipanteOspite() {
+		return idPartecipanteOspite;
 	}
-	public void setPartecipanteOspite(Partecipante partecipanteOspite) {
-		this.partecipanteOspite = partecipanteOspite;
+
+
+	public String getIdPartita() {
+		return idPartita;
 	}
+
+
+	public void setIdPartita(String idPartita) {
+		this.idPartita = idPartita;
+	}
+
+
+	public String getIdCalendario() {
+		return idCalendario;
+	}
+
+
+	public void setIdCalendario(String idCalendario) {
+		this.idCalendario = idCalendario;
+	}
+
+
+	public void setIdPartecipanteOspite(String idPartecipanteOspite) {
+		this.idPartecipanteOspite = idPartecipanteOspite;
+	}
+
+
 	public int getRisultatoPartecipanteCasa() {
 		return risultatoPartecipanteCasa;
 	}
@@ -35,6 +66,6 @@ public class Partita {
 		this.risultatoPartecipanteOspite = risultatoPartecipanteOspite;
 	}
 
-	private Partecipante partecipanteCasa, partecipanteOspite;
+	private String idPartita,idCalendario,idPartecipanteCasa, idPartecipanteOspite;;
 	private int risultatoPartecipanteCasa, risultatoPartecipanteOspite;
 }

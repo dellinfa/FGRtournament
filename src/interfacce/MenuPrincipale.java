@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import javax.swing.JButton;
@@ -63,7 +64,15 @@ public class MenuPrincipale {
 		ActionListener cla = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new ClassificaInterface();
+				try {
+					new ClassificaInterface();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		};
 

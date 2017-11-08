@@ -124,20 +124,6 @@ public class VediCalendario {
 
 	}
 
-//	public void leggi() throws FileNotFoundException {
-//		try {
-//			FileReader fr = new FileReader("calendario.txt");
-//			Scanner sc = new Scanner(fr);
-//			while (sc.hasNext()) {
-//				ta.append(sc.nextLine());
-//				ta.append("\n");
-//			}
-//			fr.close();
-//		} catch (IOException e) {
-//
-//		}
-//
-//	}
 	
 	ActionListener indietro = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {

@@ -3,7 +3,9 @@ package interfacce;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Menu;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,11 +21,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Controller.ControllerCalendario;
 import Controller.ControllerTorneo;
+import commons.Calendario;
 import commons.Giocatore;
 import commons.Partecipante;
 import commons.Squadra;
 import commons.Torneo;
+import connessioniClassiDataBase.ConnessioneCalendario;
+import connessioniClassiDataBase.ConnessionePartite;
 import gestori.GestoreDatiPersistenti;
 
 public class CreaCalendarioInterface {
@@ -31,11 +37,15 @@ public class CreaCalendarioInterface {
 	private JFrame frame;
 	private HashMap<String, Torneo> tornei;
 	private ControllerTorneo ct;
+	private ConnessionePartite cp;
+	private ConnessioneCalendario connessioneC;
+	private ControllerCalendario controllerC;
 	private HashMap<String, Squadra> squadre;
 	private HashMap<String, Giocatore> giocatori;
+	private HashMap<String, Calendario> calendari;
 	private Torneo torneo;
 	private ArrayList<String> partecipanti = new ArrayList<String>();
-
+	private boolean creato;
 	private static CreaCalendarioInterface istanza;
 
 	public static CreaCalendarioInterface getInstance() throws ParseException, SQLException, IOException {
@@ -61,9 +71,15 @@ public class CreaCalendarioInterface {
 		frame.add(panel2, BorderLayout.CENTER);
 
 		ct = ControllerTorneo.getInstance();
+		controllerC = ControllerCalendario.getInstance();
+		cp = new ConnessionePartite();
+		connessioneC = new ConnessioneCalendario();
+
 		tornei = ct.getTornei();
 		giocatori = ct.getGiocatori();
 		squadre = ct.getSquadre();
+		calendari = controllerC.getCalendario();
+
 		Torneo nameSport = ElencoTorneiInterface.prendiTorneo();
 		int numPart;
 		String nomeS;
@@ -81,6 +97,7 @@ public class CreaCalendarioInterface {
 		int i = 0;
 
 		if (nameSport.getSport().equalsIgnoreCase("ping pong")) {
+
 			for (Entry<String, Giocatore> entry : giocatori.entrySet()) {
 				if (nameSport.getSport()
 						.equalsIgnoreCase(GestoreDatiPersistenti.torneoGiocatoreS(entry.getValue().getId()))) {
@@ -100,171 +117,265 @@ public class CreaCalendarioInterface {
 				}
 			}
 		}
-		
-		nomeS= nameSport.getSport();
-		
-		if(nomeS.equalsIgnoreCase("calcio")){
-			FileOutputStream fos= new FileOutputStream("calendarioCalcio.txt");
-			PrintStream ps= new PrintStream(fos);
-			int numero_partecipanti = partecipanti.size();
-			int giornate = numero_partecipanti - 1;
 
-			/* crea gli array per le due liste in casa e fuori */
-			String[] casa = new String[numero_partecipanti / 2];
-			String[] trasferta = new String[numero_partecipanti / 2];
+		nomeS = nameSport.getSport();
 
-			for (int k = 0; k < numero_partecipanti / 2; k++) {
-				casa[k] = partecipanti.get(k);
-				trasferta[k] = partecipanti.get(numero_partecipanti - 1 - k);
+		if (nomeS.equalsIgnoreCase("calcio")) {
+			creato = false;
+
+			for (Entry<String, Calendario> entry : calendari.entrySet()) {
+				if (entry.getValue().getIdCalendario().equalsIgnoreCase("Calcio")) {
+
+					creato = true;
+				}
 			}
 
-			for (int k = 0; k < giornate; k++) {
-				// stampa le partite di questa giornata 
-				ps.println("Giornata " + (k + 1));
+			if (creato) {
+				ControllerCalendario.visualizzaErrore("Il calendario è stato già creato!");
+				new MenuPrincipale(nameSport.getSport());
+			} else {
 
-				for (int j = 0; j < numero_partecipanti / 2; j++)
-					ps.println((j + 1) + ") " + trasferta[j] + " - " + casa[j]);
+				FileOutputStream fos = new FileOutputStream("calendarioCalcio.txt");
+				PrintStream ps = new PrintStream(fos);
+				int numero_partecipanti = partecipanti.size();
+				int giornate = numero_partecipanti - 1;
 
-				// Ruota in gli elementi delle liste, tenendo fisso il primo elemento. Salva l'elemento fisso
-				String pivot = casa[0];
+				/* crea gli array per le due liste in casa e fuori */
+				String[] casa = new String[numero_partecipanti / 2];
+				String[] trasferta = new String[numero_partecipanti / 2];
 
-				 // sposta in avanti gli elementi di "trasferta" inserendo all'inizio l'elemento casa[1] e salva l'elemento uscente in "riporto"
-				 
+				for (int k = 0; k < numero_partecipanti / 2; k++) {
+					casa[k] = partecipanti.get(k);
+					trasferta[k] = partecipanti.get(numero_partecipanti - 1 - k);
+				}
 
-				String riporto = trasferta[trasferta.length - 1];
-				trasferta = shiftRight(trasferta, casa[1]);
+				for (int k = 0; k < giornate; k++) {
 
-				 //sposta a sinistra gli elementi di "casa" inserendo all'ultimo posto l'elemento "riporto"			 
-				casa = shiftLeft(casa, riporto);
+					// stampa le partite di questa giornata
+					ps.println("Giornata " + (k + 1));
 
-				// ripristina l'elemento fisso
-				casa[0] = pivot;
-			}
-		}else if(nomeS.equalsIgnoreCase("pallavolo")) {
-			FileOutputStream fos= new FileOutputStream("calendarioPallavolo.txt");
-			PrintStream ps= new PrintStream(fos);
-			int numero_partecipanti = partecipanti.size();
-			int giornate = numero_partecipanti - 1;
+					for (int j = 0; j < numero_partecipanti / 2; j++) {
+						ps.println((j + 1) + ") " + trasferta[j] + " - " + casa[j]);
+						cp.savePartita(0, 0, (k + 1) + "" + (j + 1) + "C", trasferta[j], casa[j], "Calcio");
 
-			/* crea gli array per le due liste in casa e fuori */
-			String[] casa = new String[numero_partecipanti / 2];
-			String[] trasferta = new String[numero_partecipanti / 2];
+					}
 
-			for (int k = 0; k < numero_partecipanti / 2; k++) {
-				casa[k] = partecipanti.get(k);
-				trasferta[k] = partecipanti.get(numero_partecipanti - 1 - k);
-			}
+					// Ruota in gli elementi delle liste, tenendo fisso il primo elemento. Salva
+					// l'elemento fisso
+					String pivot = casa[0];
 
-			for (int k = 0; k < giornate; k++) {
-				// stampa le partite di questa giornata 
-				ps.println("Giornata " + (k + 1));
+					// sposta in avanti gli elementi di "trasferta" inserendo all'inizio l'elemento
+					// casa[1] e salva l'elemento uscente in "riporto"
 
-				for (int j = 0; j < numero_partecipanti / 2; j++)
-					ps.println((j + 1) + ") " + trasferta[j] + " - " + casa[j]);
+					String riporto = trasferta[trasferta.length - 1];
+					trasferta = shiftRight(trasferta, casa[1]);
 
-				// Ruota in gli elementi delle liste, tenendo fisso il primo elemento. Salva l'elemento fisso
-				String pivot = casa[0];
+					// sposta a sinistra gli elementi di "casa" inserendo all'ultimo posto
+					// l'elemento "riporto"
+					casa = shiftLeft(casa, riporto);
 
-				 // sposta in avanti gli elementi di "trasferta" inserendo all'inizio l'elemento casa[1] e salva l'elemento uscente in "riporto"
-				 
+					// ripristina l'elemento fisso
+					casa[0] = pivot;
 
-				String riporto = trasferta[trasferta.length - 1];
-				trasferta = shiftRight(trasferta, casa[1]);
+				}
+				connessioneC.saveCalendario("Calcio");
 
-				 //sposta a sinistra gli elementi di "casa" inserendo all'ultimo posto l'elemento "riporto"			 
-				casa = shiftLeft(casa, riporto);
+				JOptionPane.showMessageDialog(frame, "Calendario creato!");
+				new MenuPrincipale(nameSport.getSport());
 
-				// ripristina l'elemento fisso
-				casa[0] = pivot;
-			}
-		}else if(nomeS.equalsIgnoreCase("basket")) {
-			FileOutputStream fos= new FileOutputStream("calendarioBasket.txt");
-			PrintStream ps= new PrintStream(fos);
-			int numero_partecipanti = partecipanti.size();
-			int giornate = numero_partecipanti - 1;
-
-			/* crea gli array per le due liste in casa e fuori */
-			String[] casa = new String[numero_partecipanti / 2];
-			String[] trasferta = new String[numero_partecipanti / 2];
-
-			for (int k = 0; k < numero_partecipanti / 2; k++) {
-				casa[k] = partecipanti.get(k);
-				trasferta[k] = partecipanti.get(numero_partecipanti - 1 - k);
 			}
 
-			for (int k = 0; k < giornate; k++) {
-				// stampa le partite di questa giornata 
-				ps.println("Giornata " + (k + 1));
+		} else if (nomeS.equalsIgnoreCase("pallavolo")) {
+			creato = false;
 
-				for (int j = 0; j < numero_partecipanti / 2; j++)
-					ps.println((j + 1) + ") " + trasferta[j] + " - " + casa[j]);
+			for (Entry<String, Calendario> entry : calendari.entrySet()) {
+				if (entry.getValue().getIdCalendario().equalsIgnoreCase("pallavolo")) {
 
-				// Ruota in gli elementi delle liste, tenendo fisso il primo elemento. Salva l'elemento fisso
-				String pivot = casa[0];
-
-				 // sposta in avanti gli elementi di "trasferta" inserendo all'inizio l'elemento casa[1] e salva l'elemento uscente in "riporto"
-				 
-
-				String riporto = trasferta[trasferta.length - 1];
-				trasferta = shiftRight(trasferta, casa[1]);
-
-				 //sposta a sinistra gli elementi di "casa" inserendo all'ultimo posto l'elemento "riporto"			 
-				casa = shiftLeft(casa, riporto);
-
-				// ripristina l'elemento fisso
-				casa[0] = pivot;
-			}
-		}else {
-			FileOutputStream fos= new FileOutputStream("calendarioPingPong.txt");
-			PrintStream ps= new PrintStream(fos);
-			int numero_partecipanti = partecipanti.size();
-			int giornate = numero_partecipanti - 1;
-
-			/* crea gli array per le due liste in casa e fuori */
-			String[] casa = new String[numero_partecipanti / 2];
-			String[] trasferta = new String[numero_partecipanti / 2];
-
-			for (int k = 0; k < numero_partecipanti / 2; k++) {
-				casa[k] = partecipanti.get(k);
-				trasferta[k] = partecipanti.get(numero_partecipanti - 1 - k);
+					creato = true;
+				}
 			}
 
-			for (int k = 0; k < giornate; k++) {
-				// stampa le partite di questa giornata 
-				ps.println("Giornata " + (k + 1));
+			if (creato) {
+				ControllerCalendario.visualizzaErrore("Il calendario è stato già creato!");
+				new MenuPrincipale(nameSport.getSport());
+			} else {
+				FileOutputStream fos = new FileOutputStream("calendarioPallavolo.txt");
+				PrintStream ps = new PrintStream(fos);
+				int numero_partecipanti = partecipanti.size();
+				int giornate = numero_partecipanti - 1;
 
-				for (int j = 0; j < numero_partecipanti / 2; j++)
-					ps.println((j + 1) + ") " + trasferta[j] + " - " + casa[j]);
+				/* crea gli array per le due liste in casa e fuori */
+				String[] casa = new String[numero_partecipanti / 2];
+				String[] trasferta = new String[numero_partecipanti / 2];
 
-				// Ruota in gli elementi delle liste, tenendo fisso il primo elemento. Salva l'elemento fisso
-				String pivot = casa[0];
+				for (int k = 0; k < numero_partecipanti / 2; k++) {
+					casa[k] = partecipanti.get(k);
+					trasferta[k] = partecipanti.get(numero_partecipanti - 1 - k);
+				}
 
-				 // sposta in avanti gli elementi di "trasferta" inserendo all'inizio l'elemento casa[1] e salva l'elemento uscente in "riporto"
-				 
+				for (int k = 0; k < giornate; k++) {
+					// stampa le partite di questa giornata
+					ps.println("Giornata " + (k + 1));
 
-				String riporto = trasferta[trasferta.length - 1];
-				trasferta = shiftRight(trasferta, casa[1]);
+					for (int j = 0; j < numero_partecipanti / 2; j++) {
+						ps.println((j + 1) + ") " + trasferta[j] + " - " + casa[j]);
+						cp.savePartita(0, 0, (k + 1) + "" + (j + 1) + "P", trasferta[j], casa[j], "Pallavolo");
 
-				 //sposta a sinistra gli elementi di "casa" inserendo all'ultimo posto l'elemento "riporto"			 
-				casa = shiftLeft(casa, riporto);
+					}
 
-				// ripristina l'elemento fisso
-				casa[0] = pivot;
+					// Ruota in gli elementi delle liste, tenendo fisso il primo elemento. Salva
+					// l'elemento fisso
+					String pivot = casa[0];
+
+					// sposta in avanti gli elementi di "trasferta" inserendo all'inizio l'elemento
+					// casa[1] e salva l'elemento uscente in "riporto"
+
+					String riporto = trasferta[trasferta.length - 1];
+					trasferta = shiftRight(trasferta, casa[1]);
+
+					// sposta a sinistra gli elementi di "casa" inserendo all'ultimo posto
+					// l'elemento "riporto"
+					casa = shiftLeft(casa, riporto);
+
+					// ripristina l'elemento fisso
+					casa[0] = pivot;
+				}
+				connessioneC.saveCalendario("Pallavolo");
+
+				JOptionPane.showMessageDialog(frame, "Calendario creato!");
+				new MenuPrincipale(nameSport.getSport());
+
 			}
+
+		} else if (nomeS.equalsIgnoreCase("basket")) {
+			creato = false;
+
+			for (Entry<String, Calendario> entry : calendari.entrySet()) {
+				if (entry.getValue().getIdCalendario().equalsIgnoreCase("basket")) {
+
+					creato = true;
+				}
+			}
+
+			if (creato) {
+				ControllerCalendario.visualizzaErrore("Il calendario è stato già creato!");
+				new MenuPrincipale(nameSport.getSport());
+			} else {
+				FileOutputStream fos = new FileOutputStream("calendarioBasket.txt");
+				PrintStream ps = new PrintStream(fos);
+				int numero_partecipanti = partecipanti.size();
+				int giornate = numero_partecipanti - 1;
+
+				/* crea gli array per le due liste in casa e fuori */
+				String[] casa = new String[numero_partecipanti / 2];
+				String[] trasferta = new String[numero_partecipanti / 2];
+
+				for (int k = 0; k < numero_partecipanti / 2; k++) {
+					casa[k] = partecipanti.get(k);
+					trasferta[k] = partecipanti.get(numero_partecipanti - 1 - k);
+				}
+
+				for (int k = 0; k < giornate; k++) {
+					// stampa le partite di questa giornata
+					ps.println("Giornata " + (k + 1));
+
+					for (int j = 0; j < numero_partecipanti / 2; j++) {
+						ps.println((j + 1) + ") " + trasferta[j] + " - " + casa[j]);
+
+						cp.savePartita(0, 0, (k + 1) + "" + (j + 1) + "B", trasferta[j], casa[j], "Basket");
+
+					}
+
+					// Ruota in gli elementi delle liste, tenendo fisso il primo elemento. Salva
+					// l'elemento fisso
+					String pivot = casa[0];
+
+					// sposta in avanti gli elementi di "trasferta" inserendo all'inizio l'elemento
+					// casa[1] e salva l'elemento uscente in "riporto"
+
+					String riporto = trasferta[trasferta.length - 1];
+					trasferta = shiftRight(trasferta, casa[1]);
+
+					// sposta a sinistra gli elementi di "casa" inserendo all'ultimo posto
+					// l'elemento "riporto"
+					casa = shiftLeft(casa, riporto);
+
+					// ripristina l'elemento fisso
+					casa[0] = pivot;
+				}
+				connessioneC.saveCalendario("Basket");
+				JOptionPane.showMessageDialog(frame, "Calendario creato!");
+				new MenuPrincipale(nameSport.getSport());
+
+			}
+
+		} else if (nomeS.equalsIgnoreCase("ping pong")) {
+			creato = false;
+
+			for (Entry<String, Calendario> entry : calendari.entrySet()) {
+				if (entry.getValue().getIdCalendario().equalsIgnoreCase("ping pong")) {
+
+					creato = true;
+				}
+			}
+
+			if (creato) {
+				ControllerCalendario.visualizzaErrore("Il calendario è stato già creato!");
+				new MenuPrincipale(nameSport.getSport());
+			} else {
+				FileOutputStream fos = new FileOutputStream("calendarioPingPong.txt");
+				PrintStream ps = new PrintStream(fos);
+				int numero_partecipanti = partecipanti.size();
+				int giornate = numero_partecipanti - 1;
+
+				/* crea gli array per le due liste in casa e fuori */
+				String[] casa = new String[numero_partecipanti / 2];
+				String[] trasferta = new String[numero_partecipanti / 2];
+
+				for (int k = 0; k < numero_partecipanti / 2; k++) {
+					casa[k] = partecipanti.get(k);
+					trasferta[k] = partecipanti.get(numero_partecipanti - 1 - k);
+				}
+
+				for (int k = 0; k < giornate; k++) {
+					// stampa le partite di questa giornata
+					ps.println("Giornata " + (k + 1));
+
+					for (int j = 0; j < numero_partecipanti / 2; j++) {
+						ps.println((j + 1) + ") " + trasferta[j] + " - " + casa[j]);
+						cp.savePartita(0, 0, (k + 1) + "" + (j + 1) + "PP", trasferta[j], casa[j], "Ping Pong");
+
+					}
+
+					// Ruota in gli elementi delle liste, tenendo fisso il primo elemento. Salva
+					// l'elemento fisso
+					String pivot = casa[0];
+
+					// sposta in avanti gli elementi di "trasferta" inserendo all'inizio l'elemento
+					// casa[1] e salva l'elemento uscente in "riporto"
+
+					String riporto = trasferta[trasferta.length - 1];
+					trasferta = shiftRight(trasferta, casa[1]);
+
+					// sposta a sinistra gli elementi di "casa" inserendo all'ultimo posto
+					// l'elemento "riporto"
+					casa = shiftLeft(casa, riporto);
+
+					// ripristina l'elemento fisso
+					casa[0] = pivot;
+				}
+				connessioneC.saveCalendario("Ping Pong");
+
+				JOptionPane.showMessageDialog(frame, "Calendario creato!");
+				new MenuPrincipale(nameSport.getSport());
+
+			}
+
+			
 		}
-		
-	
-	
-
-		
-		
-		
-		
-		JOptionPane.showMessageDialog(frame, "Calendario creato!");
-		new MenuPrincipale(" ");
 		frame.pack();
-		frame.setVisible(false);
-		frame.setSize(500, 100);
+			frame.setVisible(false);
+			frame.setSize(500, 100);
 
 	}
 

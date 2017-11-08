@@ -19,6 +19,7 @@ public class ControllerTorneo {
 	private HashMap<String, Torneo> tornei;
 	private HashMap<String, Squadra> squadre;
 	private HashMap<String, Giocatore> giocatori;
+	private HashMap<String, Partita> partite;
 
 	
 	public static ControllerTorneo getInstance() throws ParseException {
@@ -47,6 +48,7 @@ public class ControllerTorneo {
 		giocatori = dp.caricaGiocatore();
 		return this.giocatori;
 	}
+	
 	
 	
 	public Torneo creaTorneo() {

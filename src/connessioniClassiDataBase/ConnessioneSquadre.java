@@ -77,27 +77,110 @@ public class ConnessioneSquadre {
 			}
 		}
 	}
+	
+	public static void aggiornaPuntiSquadra(String squadra, int punti) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
 
-//	public static String getTorneoFromSquadra(String squadra) throws SQLException {
-//		ResultSet rs = null;
-//		String stringSport = null;
-//		try {
-//
-//			rs = stm.executeQuery("select * from squadra");
-//			
-//			while (rs.next()) {
-//				stringSport = rs.getString("torneo");
-//
-//			}
-//		} catch (Exception e) {
-//			ControllerTorneo.visualizzaErrore("a");
-//
-//		}
-//
-//		return stringSport;
-//
-//	}
-//
-//	private static Statement stm;
+		String insertMySql = "UPDATE squadra SET punti = ? WHERE id = ?";
 
+		try {
+			con = GestoreDatiPersistenti.getConnection();
+			ps = con.prepareStatement(insertMySql);
+			ps.setInt(1, punti);
+			ps.setString(2, squadra);
+
+			ps.executeUpdate();
+
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} finally {
+				if (con != null)
+					con.close();
+			}
+		}
+	}
+	
+	public static void aggiornaPartiteVinte(String squadra, int partiteVinte) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		String insertMySql = "UPDATE squadra SET partiteVinte = ? WHERE id = ?";
+
+		try {
+			con = GestoreDatiPersistenti.getConnection();
+			ps = con.prepareStatement(insertMySql);
+			ps.setInt(1, partiteVinte);
+			ps.setString(2, squadra);
+
+			ps.executeUpdate();
+
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} finally {
+				if (con != null)
+					con.close();
+			}
+		}
+	}
+	
+	public static void aggiornaPartitePerse(String squadra, int partitePerse) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		String insertMySql = "UPDATE squadra SET partitePerse = ? WHERE id = ?";
+
+		try {
+			con = GestoreDatiPersistenti.getConnection();
+			ps = con.prepareStatement(insertMySql);
+			ps.setInt(1, partitePerse);
+			ps.setString(2, squadra);
+
+			ps.executeUpdate();
+
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} finally {
+				if (con != null)
+					con.close();
+			}
+		}
+	}
+	
+	public static void aggiornaPartiteG(String squadra, int partiteGiocate) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		String insertMySql = "UPDATE squadra SET partiteGiocate = ? WHERE id = ?";
+
+		try {
+			con = GestoreDatiPersistenti.getConnection();
+			ps = con.prepareStatement(insertMySql);
+			ps.setInt(1, partiteGiocate);
+			ps.setString(2, squadra);
+
+			ps.executeUpdate();
+
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} finally {
+				if (con != null)
+					con.close();
+			}
+		}
+	}
+
+	
 }

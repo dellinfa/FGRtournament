@@ -21,6 +21,7 @@ import commons.Giocatore;
 import commons.Squadra;
 import commons.Torneo;
 import connessioniClassiDataBase.ConnessioneGiocatore;
+import connessioniClassiDataBase.ConnessioneGiocatore;
 import connessioniClassiDataBase.ConnessioneSquadre;
 import gestori.GestoreDatiPersistenti;
 
@@ -83,8 +84,6 @@ public class InserisciPartecipanteInterface {
 
 					if (!torneo.getValue().getListPartecipanti().contains(entry.getValue())
 							&& (entry.getValue().getNomeSquadra() == null)) {
-						System.out.println(entry.getValue().getId());
-						System.out.println(entry.getValue().getNomeSquadra());
 						trovato = true;
 						break;
 					}

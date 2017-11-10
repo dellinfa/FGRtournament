@@ -48,6 +48,62 @@ public class ConnessioneTorneo {
 				}
 					}
 			}
+		
+		
+		public static void setCalendarioToTorneo(String torneo, String calendario) throws SQLException {
+			Connection con = null;
+			PreparedStatement ps = null;
+
+			String insertMySql = "UPDATE torneo SET idCalendario = ? WHERE  sport= ?";
+
+			try {
+				con = GestoreDatiPersistenti.getConnection();
+				ps = con.prepareStatement(insertMySql);
+				ps.setString(1, calendario);
+				ps.setString(2, torneo);
+
+				ps.executeUpdate();
+
+			} finally {
+				try {
+					if (ps != null) {
+						ps.close();
+					}
+				} finally {
+					if (con != null)
+						con.close();
+				}
+			}
+		}
+		
+		public static void setClassificaToTorneo(String torneo, String classifica) throws SQLException {
+			Connection con = null;
+			PreparedStatement ps = null;
+
+			String insertMySql = "UPDATE torneo SET idClassifica = ? WHERE  sport= ?";
+
+			try {
+				con = GestoreDatiPersistenti.getConnection();
+				ps = con.prepareStatement(insertMySql);
+				ps.setString(1, classifica);
+				ps.setString(2, torneo);
+
+				ps.executeUpdate();
+
+			} finally {
+				try {
+					if (ps != null) {
+						ps.close();
+					}
+				} finally {
+					if (con != null)
+						con.close();
+				}
+			}
+		}
+		
+		
+		
 
 }
 

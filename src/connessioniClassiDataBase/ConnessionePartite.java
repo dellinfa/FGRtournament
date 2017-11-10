@@ -44,31 +44,6 @@ public class ConnessionePartite {
 		}
 	}
 	
-	public static void removePartita(String idPartita) throws SQLException {
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		String insertMySql = "DELETE FROM partita WHERE idPartita = ?";
-
-		try {
-			con = GestoreDatiPersistenti.getConnection();
-			ps = con.prepareStatement(insertMySql);
-			ps.setString(1, idPartita);
-
-			ps.executeUpdate();
-
-		} finally {
-			try {
-				if (ps != null) {
-					ps.close();
-				}
-			} finally {
-				if (con != null)
-					con.close();
-			}
-		}
-	}
-
 	public static void setRisultatoCasaToPartita(String idPartita, int risultatoPartecipanteCasa) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -106,6 +81,32 @@ public class ConnessionePartite {
 			ps = con.prepareStatement(insertMySql);
 			ps.setInt(1, risultatoPartecipanteOspite);
 			ps.setString(2, idPartita);
+			
+
+			ps.executeUpdate();
+
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} finally {
+				if (con != null)
+					con.close();
+			}
+		}
+	}
+	
+	public static void removePartita(String idPartita) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		String insertMySql = "DELETE FROM partita WHERE idPartita = ?";
+
+		try {
+			con = GestoreDatiPersistenti.getConnection();
+			ps = con.prepareStatement(insertMySql);
+			ps.setString(1, idPartita);
 			
 
 			ps.executeUpdate();

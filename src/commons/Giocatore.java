@@ -4,8 +4,7 @@ import java.util.Date;
 
 public class Giocatore extends Partecipante{
 
-	public Giocatore(String nome, int punti, int partiteGiocate, int partiteVinte, int partitePerse, String cognome, Date dataNascita, 
-			int annoImmatricolazione, int annoCorso, String id, String recapito, String nomeSquadra ) {
+	public Giocatore(String nome,  String cognome, Date dataNascita, int annoImmatricolazione, int annoCorso, String id,int punti, int partiteGiocate, int partiteVinte, int partitePerse, String recapito, String nomeSquadra ) {
 		super(id, punti, partiteGiocate, partiteVinte, partitePerse);
 		this.cognome=cognome;
 		this.dataNascita=dataNascita;

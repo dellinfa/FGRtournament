@@ -29,7 +29,9 @@ import commons.Partecipante;
 import commons.Squadra;
 import commons.Torneo;
 import connessioniClassiDataBase.ConnessioneCalendario;
+import connessioniClassiDataBase.ConnessioneClassifica;
 import connessioniClassiDataBase.ConnessionePartite;
+import connessioniClassiDataBase.ConnessioneTorneo;
 import gestori.GestoreDatiPersistenti;
 
 public class CreaCalendarioInterface {
@@ -38,7 +40,9 @@ public class CreaCalendarioInterface {
 	private HashMap<String, Torneo> tornei;
 	private ControllerTorneo ct;
 	private ConnessionePartite cp;
-	private ConnessioneCalendario connessioneC;
+	private ConnessioneCalendario connessioneCa;
+	private ConnessioneTorneo connessioneT;
+	private ConnessioneClassifica connessioneCl;
 	private ControllerCalendario controllerC;
 	private HashMap<String, Squadra> squadre;
 	private HashMap<String, Giocatore> giocatori;
@@ -73,7 +77,9 @@ public class CreaCalendarioInterface {
 		ct = ControllerTorneo.getInstance();
 		controllerC = ControllerCalendario.getInstance();
 		cp = new ConnessionePartite();
-		connessioneC = new ConnessioneCalendario();
+		connessioneCa = new ConnessioneCalendario();
+		connessioneCl = new ConnessioneClassifica();
+		connessioneT = new ConnessioneTorneo();
 
 		tornei = ct.getTornei();
 		giocatori = ct.getGiocatori();
@@ -178,7 +184,10 @@ public class CreaCalendarioInterface {
 					casa[0] = pivot;
 
 				}
-				connessioneC.saveCalendario("Calcio");
+				connessioneCa.saveCalendario("Calcio");
+				connessioneCl.saveClassifica("Calcio");
+				connessioneT.setCalendarioToTorneo("Calcio", "Calcio");
+				connessioneT.setClassificaToTorneo("Calcio", "Calcio");
 
 				JOptionPane.showMessageDialog(frame, "Calendario creato!");
 				new MenuPrincipale(nameSport.getSport());
@@ -189,7 +198,7 @@ public class CreaCalendarioInterface {
 			creato = false;
 
 			for (Entry<String, Calendario> entry : calendari.entrySet()) {
-				if (entry.getValue().getIdCalendario().equalsIgnoreCase("pallavolo")) {
+				if (entry.getValue().getIdCalendario().equalsIgnoreCase("Pallavolo")) {
 
 					creato = true;
 				}
@@ -240,7 +249,10 @@ public class CreaCalendarioInterface {
 					// ripristina l'elemento fisso
 					casa[0] = pivot;
 				}
-				connessioneC.saveCalendario("Pallavolo");
+				connessioneCa.saveCalendario("Pallavolo");
+				connessioneCl.saveClassifica("Pallavolo");
+				connessioneT.setCalendarioToTorneo("Pallavolo", "Pallavolo");
+				connessioneT.setClassificaToTorneo("Pallavolo", "Pallavolo");
 
 				JOptionPane.showMessageDialog(frame, "Calendario creato!");
 				new MenuPrincipale(nameSport.getSport());
@@ -251,7 +263,7 @@ public class CreaCalendarioInterface {
 			creato = false;
 
 			for (Entry<String, Calendario> entry : calendari.entrySet()) {
-				if (entry.getValue().getIdCalendario().equalsIgnoreCase("basket")) {
+				if (entry.getValue().getIdCalendario().equalsIgnoreCase("Basket")) {
 
 					creato = true;
 				}
@@ -303,7 +315,11 @@ public class CreaCalendarioInterface {
 					// ripristina l'elemento fisso
 					casa[0] = pivot;
 				}
-				connessioneC.saveCalendario("Basket");
+				connessioneCa.saveCalendario("Basket");
+				connessioneCl.saveClassifica("Basket");
+				connessioneT.setCalendarioToTorneo("Basket", "Basket");
+				connessioneT.setClassificaToTorneo("Basket", "Basket");
+
 				JOptionPane.showMessageDialog(frame, "Calendario creato!");
 				new MenuPrincipale(nameSport.getSport());
 
@@ -313,7 +329,7 @@ public class CreaCalendarioInterface {
 			creato = false;
 
 			for (Entry<String, Calendario> entry : calendari.entrySet()) {
-				if (entry.getValue().getIdCalendario().equalsIgnoreCase("ping pong")) {
+				if (entry.getValue().getIdCalendario().equalsIgnoreCase("Ping Pong")) {
 
 					creato = true;
 				}
@@ -364,18 +380,20 @@ public class CreaCalendarioInterface {
 					// ripristina l'elemento fisso
 					casa[0] = pivot;
 				}
-				connessioneC.saveCalendario("Ping Pong");
+				connessioneCa.saveCalendario("Ping Pong");
+				connessioneCl.saveClassifica("Ping Pong");
+				connessioneT.setCalendarioToTorneo("Ping Pong", "Ping Pong");
+				connessioneT.setClassificaToTorneo("Ping Pong", "Ping Pong");
 
 				JOptionPane.showMessageDialog(frame, "Calendario creato!");
 				new MenuPrincipale(nameSport.getSport());
 
 			}
 
-			
 		}
 		frame.pack();
-			frame.setVisible(false);
-			frame.setSize(500, 100);
+		frame.setVisible(false);
+		frame.setSize(500, 100);
 
 	}
 

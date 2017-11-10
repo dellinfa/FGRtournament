@@ -110,7 +110,12 @@ public class InserisciPartecipanteInterface {
 
 			ActionListener indietro = new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new MenuPrincipale(" ");
+					try {
+						new MenuPrincipale(" ");
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					frame.setVisible(false);
 				}
 			};
@@ -128,8 +133,6 @@ public class InserisciPartecipanteInterface {
 
 							}
 						}
-
-						System.out.println(count);
 
 						if (count < numP) {
 							ConnessioneGiocatore.setTorneoToGiocatore(cbListaGiocatori.getSelectedItem().toString(),
@@ -169,11 +172,12 @@ public class InserisciPartecipanteInterface {
 							e1.printStackTrace();
 						}
 					}
-					if (count == numP ) {
+					if (count == numP) {
 
 						try {
-							frame.setVisible(false);
+							
 							new CreaCalendarioInterface();
+							frame.setVisible(false);
 
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
@@ -241,7 +245,12 @@ public class InserisciPartecipanteInterface {
 
 			ActionListener indietro = new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new MenuPrincipale(" ");
+					try {
+						new MenuPrincipale(" ");
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					frame.setVisible(false);
 				}
 			};
@@ -298,7 +307,6 @@ public class InserisciPartecipanteInterface {
 							e1.printStackTrace();
 						}
 					}
-					
 
 					if (count == numP) {
 

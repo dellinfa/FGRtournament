@@ -1,0 +1,9 @@
+Giornata 1
+1) Siviglia - Parma
+2) Bari - Bologna
+Giornata 2
+1) Bologna - Parma
+2) Siviglia - Bari
+Giornata 3
+1) Bari - Parma
+2) Bologna - Siviglia

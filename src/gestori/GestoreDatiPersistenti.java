@@ -135,7 +135,7 @@ public class GestoreDatiPersistenti {
 		Squadra squadra = null;
 
 		try {
-			rs = stm.executeQuery("select * from squadra");
+			rs = stm.executeQuery("select * from squadra order by punti DESC");
 			while (rs.next()) {
 				id = rs.getString("id");
 				punti = rs.getInt("punti");
@@ -149,7 +149,7 @@ public class GestoreDatiPersistenti {
 			return this.squadre;
 
 		} catch (SQLException e) {
-			System.err.println("Errore caricamento tornei");
+			System.err.println("Errore caricamento squadre");
 			return null;
 		}
 
@@ -168,7 +168,7 @@ public class GestoreDatiPersistenti {
 		Giocatore giocatore = null;
 
 		try {
-			rs = stm.executeQuery("select * from giocatore");
+			rs = stm.executeQuery("select * from giocatore order by punti DESC");
 			while (rs.next()) {
 				nome = rs.getString("nome");
 				cognome = rs.getString("cognome");
@@ -184,8 +184,7 @@ public class GestoreDatiPersistenti {
 				recapito = rs.getString("recapito");
 				nomeSquadra = rs.getString("nome_squadra");
 
-				giocatore = new Giocatore(nome, punti, partiteGiocate, partiteVinte, partitePerse, cognome, dataNascita,
-						annoImmatricolazione, annoCorso, id, recapito, nomeSquadra);
+				giocatore = new Giocatore(nome,  cognome, dataNascita,	annoImmatricolazione, annoCorso, id, punti, partiteGiocate, partiteVinte, partitePerse, recapito, nomeSquadra);
 				this.giocatori.put(giocatore.getId(), giocatore);
 			}
 			return this.giocatori;

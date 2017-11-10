@@ -3,10 +3,14 @@ package interfacce;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,11 +18,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Controller.ControllerCalendario;
+import commons.Calendario;
+
 public class MenuPrincipale {
 
-	
-	
-	public MenuPrincipale(String sport) {
+	private HashMap<String, Calendario> calendari;
+	private ControllerCalendario cc;
+
+	public MenuPrincipale(String sport) throws ParseException {
 		this.sport = sport;
 
 		frame = new JFrame("FGRtournament");
@@ -43,6 +51,9 @@ public class MenuPrincipale {
 		JButton inserisciPartecipante = new JButton("Inserisci partecipante");
 		panel2.add(inserisciPartecipante);
 
+		cc = ControllerCalendario.getInstance();
+		calendari = cc.getCalendario();
+
 		JPanel panel3 = new JPanel();
 		panel3.setLayout(new GridLayout(1, 1));
 		JButton indietro = new JButton("Indietro");
@@ -51,13 +62,17 @@ public class MenuPrincipale {
 
 		ActionListener cale = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
+
 				try {
+					frame.setVisible(false);
 					new CalendarioInterface();
+					
+					
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+
 			}
 		};
 
@@ -65,7 +80,21 @@ public class MenuPrincipale {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				try {
-					new ClassificaInterface();
+					boolean trovato = false;
+					for (Entry<String, Calendario> entry : calendari.entrySet()) {
+						if (ElencoTorneiInterface.prendiTorneo().getSport()
+								.equalsIgnoreCase(entry.getValue().getIdCalendario())) {
+							trovato = true;
+						}
+					}
+					if (trovato) {
+						new ClassificaInterface();
+					} else {
+						ControllerCalendario
+								.visualizzaErrore("Non sono stati inseriti tutti i partecipanti per questo torneo!");
+						new MenuPrincipale(ElencoTorneiInterface.prendiTorneo().getSport());
+					}
+
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -77,7 +106,7 @@ public class MenuPrincipale {
 		};
 
 		ActionListener insert;
-		
+
 		insert = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
@@ -90,33 +119,33 @@ public class MenuPrincipale {
 					e2.printStackTrace();
 				}
 			}
-			
-		};
-	
 
-		ActionListener back=new ActionListener(){
+		};
+
+		ActionListener back = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					frame.setVisible(false);
 					new ElencoTorneiInterface();
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
-				frame.setVisible(false);
+				
 			}
 		};
-		
+
 		calendario.addActionListener(cale);
 		classifica.addActionListener(cla);
 		inserisciPartecipante.addActionListener(insert);
 		indietro.addActionListener(back);
-		
+
 		frame.pack();
 		frame.setVisible(true);
-		frame.setSize(500,250);
+		frame.setSize(500, 250);
 
-}
+	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		new MenuPrincipale(sport);
 	}
 

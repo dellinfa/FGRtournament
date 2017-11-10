@@ -25,7 +25,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.plaf.basic.BasicOptionPaneUI;
 
+import Controller.ControllerCalendario;
 import Controller.ControllerTorneo;
+import commons.Calendario;
 import commons.Giocatore;
 import commons.Partecipante;
 import commons.Squadra;
@@ -35,6 +37,9 @@ import gestori.GestoreDatiPersistenti;
 public class CalendarioInterface {
 
 	private JFrame frame;
+	private HashMap<String, Calendario> calendari;
+	private ControllerCalendario cc;
+	
 
 	public CalendarioInterface() throws ParseException {
 
@@ -51,6 +56,10 @@ public class CalendarioInterface {
 		JButton buttonVediCalendario = new JButton("VEDI CALENDARIO");
 		JButton buttonRegistraRisultato = new JButton("REGISTRA RISULTATO");
 		JButton buttonIndietro = new JButton("INDIETRO");
+		
+		cc = ControllerCalendario.getInstance();
+		calendari=cc.getCalendario();
+		
 
 		panel1.add(label1, BorderLayout.NORTH);
 		panel1.add(buttonRegistraRisultato, BorderLayout.EAST);
@@ -60,7 +69,12 @@ public class CalendarioInterface {
 
 		ActionListener indietro = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MenuPrincipale(" ");
+				try {
+					new MenuPrincipale(ElencoTorneiInterface.prendiTorneo().getSport());
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				frame.setVisible(false);
 			}
 		};
@@ -69,7 +83,20 @@ public class CalendarioInterface {
 		ActionListener registraRisultato = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					new RegistraRisultato();
+					boolean trovato= false;
+					for(Entry<String, Calendario> entry : calendari.entrySet()) {
+						if(ElencoTorneiInterface.prendiTorneo().getSport().equalsIgnoreCase(entry.getValue().getIdCalendario())) {
+							trovato =true;
+						}
+					}
+					if(trovato) {
+						new RegistraRisultato();
+						frame.setVisible(false);
+					}else {
+						ControllerCalendario.visualizzaErrore("Non è stato generato ancora alcun calendario per questo torneo!");
+						return;
+					}
+					
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -84,8 +111,23 @@ public class CalendarioInterface {
 		ActionListener vediCalendario = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				try {
-					new VediCalendario();
+				
+					try {
+						boolean trovato= false;
+						for(Entry<String, Calendario> entry : calendari.entrySet()) {
+							if(ElencoTorneiInterface.prendiTorneo().getSport().equalsIgnoreCase(entry.getValue().getIdCalendario())) {
+								trovato =true;
+							}
+						}
+						if(trovato) {
+							new VediCalendario();
+							
+							frame.setVisible(false);
+						}else {
+							ControllerCalendario.visualizzaErrore("Non è stato generato ancora alcun calendario per questo torneo!");
+							new CalendarioInterface();
+						}
+					
 				} catch (HeadlessException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

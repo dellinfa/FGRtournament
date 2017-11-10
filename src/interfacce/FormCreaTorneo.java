@@ -73,18 +73,9 @@ public class FormCreaTorneo {
 
 		JLabel label2 = new JLabel("Sport");
 		JTextField sport = new JTextField(20);
-		// JLabel label3=new JLabel("Modalità svolgimento incontro");
-		// String[] modSvolgimentoIncontri = new String[] {"Squadra", "Singola"};
-		// JComboBox<String> cbModSvolgimentoIncontri = new
-		// JComboBox<>(modSvolgimentoIncontri);
 		JLabel label8 = new JLabel("Numero massimo di partecipanti");
-		String[] numMaxPartecipanti = new String[] { "2", "4", "6", "8", "10" };
+		String[] numMaxPartecipanti = new String[] { "4", "6", "8", "10" };
 		JComboBox<String> cbMaxPartecipanti = new JComboBox<>(numMaxPartecipanti);
-		// JLabel label4=new JLabel("Modalità attribuzione punti
-		// (Vincente-Pareggio-Perdente)");
-		// String[] modAttribuzionePt = new String[]{"3-1-0", "2-1-0", "1-0-0"};
-		// JComboBox<String> cbAttribuzionePt = new JComboBox<>(modAttribuzionePt);
-		//JTextField modAttribuzioniPt = new JTextField(20);
 		JLabel label6 = new JLabel("Data inizio torneo");
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString("dd/MM/yyyy");
@@ -96,16 +87,12 @@ public class FormCreaTorneo {
 
 		panel3.add(label2);
 		panel3.add(sport);
-		// panel3.add(label3);
-		// panel3.add(cbModSvolgimentoIncontri);
 		panel3.add(label6);
 		panel3.add(dateChooser);
 		panel3.add(label7);
 		panel3.add(dateChooser1);
 		panel3.add(label8);
 		panel3.add(cbMaxPartecipanti);
-		// panel3.add(label4);
-		// panel3.add(cbAttribuzionePt);
 
 		ActionListener back = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -136,24 +123,24 @@ public class FormCreaTorneo {
 
 					numP = Integer.parseInt((String) cbMaxPartecipanti.getSelectedItem());
 					dI = dateChooser.getDate();
-					
-//					Calendar today = Calendar.getInstance();
-//					int day = today.get(Calendar.DAY_OF_MONTH);
-//					int month = today.get(Calendar.MONTH) + 1;
-//					int year = today.get(Calendar.YEAR);
+
+					// Calendar today = Calendar.getInstance();
+					// int day = today.get(Calendar.DAY_OF_MONTH);
+					// int month = today.get(Calendar.MONTH) + 1;
+					// int year = today.get(Calendar.YEAR);
 
 					Calendar dICal = Calendar.getInstance();
 
 					try {
 						dICal.setTime(dI);
-						if(dI.before(new Date())){
-							throw new IllegalArgumentException(); 
+						if (dI.before(new Date())) {
+							throw new IllegalArgumentException();
 						}
-					} catch(IllegalArgumentException e3) {
-						ControllerTorneo.visualizzaErrore("La data di inizio torneo è antecedente o uguale a quella odierna!");
+					} catch (IllegalArgumentException e3) {
+						ControllerTorneo
+								.visualizzaErrore("La data di inizio torneo è antecedente o uguale a quella odierna!");
 						return;
-					}
-					catch(NullPointerException e3) {
+					} catch (NullPointerException e3) {
 						ControllerTorneo.visualizzaErrore("Errore data inizio!");
 						return;
 					}
@@ -161,11 +148,12 @@ public class FormCreaTorneo {
 					int monthI = dICal.get(Calendar.MONTH) + 1;
 					int yearI = dICal.get(Calendar.YEAR);
 
-//					se il giorno della prenotazione Ã¨ antecedente a quello odierno
-//					if (dICal.before(new Date())) {
-//						ControllerTorneo.visualizzaErrore("La data di inizio torneo è antecedente a quella odierna!");
-//						return;
-//					}
+					// se il giorno della prenotazione Ã¨ antecedente a quello odierno
+					// if (dICal.before(new Date())) {
+					// ControllerTorneo.visualizzaErrore("La data di inizio torneo è antecedente a
+					// quella odierna!");
+					// return;
+					// }
 
 					dF = dateChooser1.getDate();
 					Calendar dFCal = Calendar.getInstance();
@@ -182,7 +170,7 @@ public class FormCreaTorneo {
 
 					// se il giorno della prenotazione Ã¨ antecedente a quello odierno
 					if (dFCal.before(new Date()) || dF.before(dI)) {
-						ControllerTorneo.visualizzaErrore("La data di fine torneo è errata!");
+						ControllerTorneo.visualizzaErrore("La data di fine torneo è antecedente alla data inizio o alla data odierna!");
 						return;
 					}
 
@@ -191,19 +179,17 @@ public class FormCreaTorneo {
 					// mSI = cbModSvolgimentoIncontri.getSelectedItem().toString();
 
 					ConnessioneTorneo cg = new ConnessioneTorneo();
-					
+
 					try {
 
-						
-						
 						switch (sp.toUpperCase()) {
-						
+
 						case "PALLAVOLO":
 							cg.saveTorneo(sp, "Squadra", "2-0-0", numP, dI, dF, Cal.toString(), Cla.toString());
 							JOptionPane.showMessageDialog(frame, "Torneo creato: " + sp.toUpperCase()
 									+ " \n Modalità svolgimento: Squadra \n Attribuzione punti: Vincitore-2 Perdente-0 \n Data inizio: "
 									+ dayI + "-" + monthI + "-" + yearI + "\n Data fine: " + dayF + "-" + monthF + "-"
-									+ yearF+ "\n Numero partecipanti: "+numP);
+									+ yearF + "\n Numero partecipanti: " + numP);
 
 							break;
 						case "CALCIO":
@@ -212,35 +198,34 @@ public class FormCreaTorneo {
 							JOptionPane.showMessageDialog(frame, "Torneo creato: " + sp.toUpperCase()
 									+ " \n Modalità svolgimento: Squadra \n Attribuzione punti: Vincitore-3 Pareggio-1 Perdente-0 \n Data inizio: "
 									+ dayI + "-" + monthI + "-" + yearI + "\n Data fine: " + dayF + "-" + monthF + "-"
-									+ yearF+ "\n Numero partecipanti: "+numP);
+									+ yearF + "\n Numero partecipanti: " + numP);
 
 							break;
 
-						
 						case "BASKET":
 							cg.saveTorneo(sp, "Squadra", "2-0-0", numP, dI, dF, Cal.toString(), Cla.toString());
 							JOptionPane.showMessageDialog(frame, "Torneo creato: " + sp.toUpperCase()
 									+ " \n Modalità svolgimento: Squadra \n Attribuzione punti: Vincitore-2 Perdente-0 \n Data inizio: "
 									+ dayI + "-" + monthI + "-" + yearI + "\n Data fine: " + dayF + "-" + monthF + "-"
-									+ yearF+ "\n Numero partecipanti: "+numP);
+									+ yearF + "\n Numero partecipanti: " + numP);
 
 							break;
 						case "PING PONG":
 							cg.saveTorneo(sp, "Singola", "1-0-0", numP, dI, dF, Cal.toString(), Cla.toString());
-						JOptionPane.showMessageDialog(frame, "Torneo creato: " + sp.toUpperCase()
-								+ " \n Modalità svolgimento: Singola \n Attribuzione punti: Vincitore-1 Perdente-0 \n Data inizio: "
+							JOptionPane.showMessageDialog(frame, "Torneo creato: " + sp.toUpperCase()
+									+ " \n Modalità svolgimento: Singola \n Attribuzione punti: Vincitore-1 Perdente-0 \n Data inizio: "
 									+ dayI + "-" + monthI + "-" + yearI + "\n Data fine: " + dayF + "-" + monthF + "-"
-									+ yearF+ "\n Numero partecipanti: "+numP);
+									+ yearF + "\n Numero partecipanti: " + numP);
 
-				break;
-				}
+							break;
+						}
 
-
-					} 
-					catch (SQLException e1) {						
+					} catch (SQLException e1) {
 						ControllerTorneo.visualizzaErrore("Torneo già esistente!");
+						return;
 					} catch (ParseException e1) {
 						ControllerTorneo.visualizzaErrore("Impossibile creare il torneo!");
+						return;
 
 					}
 					try {
@@ -252,18 +237,19 @@ public class FormCreaTorneo {
 					et.frame.pack();
 					et.frame.setVisible(true);
 					frame.setVisible(false);
-					
 
 				} else {
 					try {
+						frame.setVisible(false);
+						JOptionPane.showMessageDialog(null, "Torneo non concesso!", "ErroreTorneo",
+								JOptionPane.ERROR_MESSAGE);
 						new FormCreaTorneo();
 					} catch (HeadlessException | ParseException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					frame.setVisible(false);
-					JOptionPane.showMessageDialog(null, "Torneo non concesso!", "ErroreTorneo",
-							JOptionPane.ERROR_MESSAGE);
+
+					return;
 
 				}
 			}
